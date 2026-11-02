@@ -17,9 +17,10 @@ const CONFIG = {
 };
  
 const FONTS = [
-  { label: "Comic (Bangers)", value: "Bangers,Impact,'Arial Black',sans-serif" },
-  { label: "Modern (Bricolage)", value: "'Bricolage Grotesque','Trebuchet MS',Verdana,sans-serif" },
-  { label: "Typewriter (Space Mono)", value: "'Space Mono','Courier New',monospace" },
+  { label: "Display (Inter Tight)", value: "'Inter Tight',Inter,system-ui,sans-serif" },
+  { label: "Body (Inter)", value: "Inter,system-ui,sans-serif" },
+  { label: "Elegant serif (Instrument Serif)", value: "'Instrument Serif',Georgia,serif" },
+  { label: "Label mono (JetBrains Mono)", value: "'JetBrains Mono','Courier New',monospace" },
   { label: "Handwritten", value: "'Brush Script MT','Segoe Script',cursive" },
   { label: "Friendly sans", value: "'Trebuchet MS',Verdana,sans-serif" },
   { label: "Serif", value: "Georgia,'Times New Roman',serif" },
@@ -51,7 +52,7 @@ const ph = (label, bg = "#ffd166", fg = "#1d1d1d") =>
 const CONTENT = {
   "identity": {
     "title": "PenguinDoDrip — Animator",
-    "description": "Animator portfolio: loops, characters and frame-by-frame chaos.",
+    "description": "Character animator and programmer on JoJo Heaven's Arrow. Poses, loops and idle animations.",
     "favicon": "assets/favicon-7.jpg",
     "shareImage": "assets/share-image-8.jpg",
     "shareTitle": "PenguinDoDrip's Portfolio",
@@ -66,44 +67,108 @@ const CONTENT = {
     "ink": "#17131f",
     "accent": "#7a2cf5"
   },
-  "canvasAspect": "16 / 10",
+  "canvasAspect": "16 / 9",
   "canvas": [
+    {
+      "id": "t-eyebrow",
+      "kind": "text",
+      "text": "ANIMATOR & PROGRAMMER — JOJO HEAVEN'S ARROW",
+      "x": 0,
+      "y": 17,
+      "w": 56,
+      "rot": 0,
+      "z": 4,
+      "locked": false,
+      "style": {
+        "fontSize": 11,
+        "fontFamily": "'JetBrains Mono','Courier New',monospace",
+        "weight": 400,
+        "color": "#6b6475",
+        "align": "left",
+        "bg": "transparent",
+        "border": "",
+        "shadow": false,
+        "tracking": 0.08
+      }
+    },
     {
       "id": "t-hello",
       "kind": "text",
-      "text": "Hi, I'm PenguinDoDrip",
-      "x": 8.6,
-      "y": 14.1,
-      "w": 44,
-      "rot": -3,
+      "text": "Character animation\nthat lands every pose.",
+      "x": 0,
+      "y": 24,
+      "w": 62,
+      "rot": 0,
       "z": 5,
       "locked": false,
       "style": {
-        "fontSize": 96,
-        "fontFamily": "Bangers,Impact,'Arial Black',sans-serif",
-        "weight": 400,
+        "fontSize": 52,
+        "fontFamily": "'Inter Tight',Inter,system-ui,sans-serif",
+        "weight": 600,
         "color": "#17131f",
         "align": "left",
         "bg": "transparent",
         "border": "",
         "shadow": false,
-        "textShadow": true
+        "tracking": -0.045,
+        "leading": 1.02
+      }
+    },
+    {
+      "id": "t-tag",
+      "kind": "text",
+      "text": "I'm PenguinDoDrip, an animator on JoJo Heaven's Arrow and a programmer. I make poses, loops and idle cycles with weight, timing and attitude.",
+      "x": 0,
+      "y": 51,
+      "w": 40,
+      "rot": 0,
+      "z": 4,
+      "locked": false,
+      "style": {
+        "fontSize": 14.5,
+        "fontFamily": "Inter,system-ui,sans-serif",
+        "weight": 400,
+        "color": "#4a4453",
+        "align": "left",
+        "bg": "transparent",
+        "border": "",
+        "shadow": false,
+        "leading": 1.55
+      }
+    },
+    {
+      "id": "btn-reel",
+      "kind": "button",
+      "text": "View selected work  →",
+      "href": "#work",
+      "x": 0,
+      "y": 73,
+      "w": 24,
+      "rot": 0,
+      "z": 7,
+      "locked": false,
+      "style": {
+        "fontSize": 12.5,
+        "bg": "transparent",
+        "border": "",
+        "shadow": false
       }
     },
     {
       "id": "img-1",
       "kind": "image",
       "src": "assets/image-1.gif",
-      "alt": "placeholder",
-      "x": 59,
-      "y": 3.3,
-      "w": 30,
-      "rot": 4,
+      "alt": "Jotaro pose animation",
+      "x": 63,
+      "y": 2,
+      "w": 34,
+      "rot": 0,
       "z": 2,
       "locked": false,
       "style": {
-        "border": "4px solid #1d1d1d",
-        "shadow": true,
+        "border": "",
+        "radius": "28px",
+        "shadow": false,
         "bg": "#f59b51"
       },
       "media": {
@@ -123,11 +188,11 @@ const CONTENT = {
       "id": "st-1",
       "kind": "sticker",
       "src": "assets/sticker-2.gif",
-      "alt": "sticker",
-      "x": 81.8,
-      "y": 61,
-      "w": 12,
-      "rot": -8,
+      "alt": "",
+      "x": 55.5,
+      "y": 64,
+      "w": 11,
+      "rot": 0,
       "z": 6,
       "locked": false,
       "style": {
@@ -145,54 +210,15 @@ const CONTENT = {
         "natW": 371,
         "natH": 539
       }
-    },
-    {
-      "id": "t-tag",
-      "kind": "text",
-      "text": "animator • programmer • genius, billionaire, playboy, philanthropist\n",
-      "x": 8,
-      "y": 62,
-      "w": 40,
-      "rot": 2,
-      "z": 4,
-      "locked": false,
-      "style": {
-        "fontSize": 28,
-        "fontFamily": "'Trebuchet MS',Verdana,sans-serif",
-        "weight": 700,
-        "color": "#1d1d1d",
-        "align": "left",
-        "bg": "#fffdf7",
-        "border": "2px solid #1d1d1d",
-        "shadow": true
-      }
-    },
-    {
-      "id": "btn-reel",
-      "kind": "button",
-      "text": "see my animations →",
-      "href": "#reel",
-      "x": 59.9,
-      "y": 68.1,
-      "w": 22,
-      "rot": -2,
-      "z": 7,
-      "locked": false,
-      "style": {
-        "fontSize": 22,
-        "bg": "transparent",
-        "border": "",
-        "shadow": false
-      }
     }
   ],
   "projects": [
     {
       "id": "p2",
       "title": "Dio Pose",
-      "desc": "This is a JoJo pose i made for the mod JoJo Heaven's Arrow",
+      "desc": "A signature Dio pose, animated for the JoJo Heaven's Arrow mod.",
       "thumb": "assets/project1-thumb-3.gif",
-      "preview": "assets/project1-preview-4.gif",
+      "preview": "",
       "link": "",
       "tags": [
         "jojo",
@@ -215,7 +241,7 @@ const CONTENT = {
     {
       "id": "p1",
       "title": "Jotaro Pose",
-      "desc": "Here's another animation i made for JoJo Heaven's Arrow",
+      "desc": "Jotaro's stance, animated for JoJo Heaven's Arrow.",
       "thumb": "assets/project2-thumb-5.gif",
       "preview": "",
       "link": "",
@@ -239,7 +265,7 @@ const CONTENT = {
     {
       "id": "p3",
       "title": "Idle Approaching Me Animation",
-      "desc": "I also made the iconic pose from the \"Approaching me\" manga panel in JoJo's",
+      "desc": "An idle loop recreating the iconic \"Approaching Me\" manga panel.",
       "thumb": "assets/project3-thumb-6.gif",
       "preview": "",
       "link": "",
@@ -265,7 +291,7 @@ const CONTENT = {
   "about": "I'm PenguinDoDrip, one of the animators behind JoJo Heaven's Arrow, and a programmer too. I live for poses that go unreasonably hard and loops that never get old.\n\nWhen I'm not animating, I'm writing code or playing chess every once in a while.",
   "links": [
     {
-      "label": "Youtube",
+      "label": "YouTube",
       "url": "https://youtube.com/@PenguinDoDrip"
     }
   ]
@@ -540,7 +566,8 @@ function applyGeometry(el, item) {
 }
  
 // Font sizes are authored for a 900px-wide canvas and scale with it.
-const scaledPx = (px) => `calc(${px} * 100cqw / 900)`;
+// Never shrinks below a readable size, so small text stays legible on phones.
+const scaledPx = (px) => `max(${Math.min(px, Math.max(15, px * 0.6))}px, calc(${px} * 100cqw / 900))`;
  
 function itemEl(item, i = 0) {
   const el = document.createElement("div");
@@ -550,8 +577,10 @@ function itemEl(item, i = 0) {
   applyGeometry(el, item);
   el.style.border = s.border || "none";
   el.style.borderRadius = s.radius || "0";
-  el.style.boxShadow = s.shadow ? "6px 8px 0 var(--ink)" : "none";
+  el.style.boxShadow = s.shadow ? "0 24px 60px -20px rgba(15, 10, 30, 0.35)" : "none";
   el.style.setProperty("--i", i); // entrance stagger order
+  // On phones the canvas stacks: left-hand items first, top to bottom, then the right-hand ones.
+  el.style.order = Math.round((item.x >= 50 ? 1000 : 0) + item.y);
   el.style.background = s.bg || "transparent";
   el.style.opacity = s.opacity === undefined ? 1 : s.opacity;
  
@@ -563,7 +592,11 @@ function itemEl(item, i = 0) {
     el.style.color = s.color || "inherit";
     el.style.textAlign = s.align || "left";
     el.style.textShadow = s.textShadow ? "0.045em 0.045em 0 var(--accent)" : "none";
-    el.style.padding = "0.2em 0.4em";
+    el.style.letterSpacing = s.tracking ? `${s.tracking}em` : "normal";
+    el.style.lineHeight = s.leading || "";
+    // Only boxed text (background or border) gets inner padding, so plain text lines up flush.
+    const boxed = (s.bg && s.bg !== "transparent") || s.border;
+    el.style.padding = boxed ? "0.2em 0.4em" : "0";
   } else if (item.kind === "button") {
     el.innerHTML = `<a class="btn" href="${esc(item.href || "#")}" style="font-size:${scaledPx(s.fontSize || 22)}">${esc(item.text)}</a>`;
   } else {
@@ -607,11 +640,11 @@ function projectCard(p, i) {
  
   const css = [
     p.rot !== undefined ? `--rot:${p.rot}deg` : "",
-    `border:${s.border || "2.5px solid var(--ink)"}`,
-    `border-radius:${s.radius || "18px"}`,
-    `--sh:${s.shadow === false ? "0px" : "6px"}`,
-    `background:${s.bg || "var(--paper)"}`,
-    `padding:${s.padding || "14px 14px 18px"}`,
+    s.border ? `border:${s.border}` : "",
+    s.radius ? `border-radius:${s.radius}` : "",
+    s.shadow === true ? "box-shadow:0 24px 60px -24px rgba(15, 10, 30, 0.35)" : "",
+    s.bg ? `background:${s.bg}` : "",
+    s.padding ? `padding:${s.padding}` : "",
     `opacity:${s.opacity === undefined ? 1 : s.opacity}`,
     `text-align:${s.align || "left"}`,
     p.featured ? "grid-column: span 2" : "",
@@ -624,18 +657,18 @@ function projectCard(p, i) {
     </div>`;
  
   const title = show.title
-    ? `<h3 style="font-size:${s.titleSize || 1.2}rem;color:${s.titleColor || "inherit"}">${esc(p.title)}</h3>` : "";
+    ? `<h3 style="font-size:${s.titleSize || 1.2}rem;color:${s.titleColor || "inherit"}">${esc(p.title)}</h3>` : "<span></span>";
+  const num = `<span class="card-num" aria-hidden="true">${String(i + 1).padStart(2, "0")}</span>`;
   const desc = show.desc ? `<p>${esc(p.desc)}</p>` : "";
   const tags = show.tags && (p.tags || []).length
     ? `<div class="tags">${p.tags.map((t) => `<span>${esc(t)}</span>`).join("")}</div>` : "";
   const link = show.link && p.link
-    ? `<a href="${esc(p.link)}" target="_blank" rel="noopener">watch project →</a>` : "";
+    ? `<a href="${esc(p.link)}" target="_blank" rel="noopener">Watch project ↗</a>` : "";
  
   return `
     <article class="card${revealed.has(p.id) ? " in" : ""}" data-pid="${esc(p.id)}" style="${css}" tabindex="0" aria-label="Open ${esc(p.title)}">
-      <span class="card-num" aria-hidden="true">${String(i + 1).padStart(2, "0")}</span>
       ${thumb}
-      <div class="card-text" style="order:${above ? 1 : 2}">${title}${desc}${tags}${link}</div>
+      <div class="card-text" style="order:${above ? 1 : 2}"><div class="card-head">${title}${num}</div>${desc}${tags}${link}</div>
     </article>`;
 }
  
@@ -648,7 +681,7 @@ function wireCardHover() {
   });
 }
  
-/* ---------- Public-site extras: lightbox, marquee, scroll reveal ---------- */
+/* ---------- Public-site extras: lightbox, scroll reveal ---------- */
 const revealed = new Set(); // project ids already revealed, so re-renders don't re-animate
 let revealObs = null;
 
@@ -666,7 +699,7 @@ function observeReveals() {
     });
   }, { threshold: 0.12, rootMargin: "0px 0px -40px 0px" });
   document.querySelectorAll(".reveal:not(.in), .card:not(.in)").forEach((el, i) => {
-    if (el.classList.contains("card")) el.style.setProperty("--d", `${(i % 3) * 90}ms`);
+    if (el.classList.contains("card")) el.style.setProperty("--d", `${(i % 3) * 110}ms`);
     revealObs.observe(el);
   });
 }
@@ -683,13 +716,13 @@ function openLightbox(pid) {
     : `<img src="${esc(resolveSrc(p.thumb))}" alt="${esc(p.title)}">`;
   box.querySelector(".lb-media").innerHTML = media;
   const many = C.projects.length > 1;
-  box.querySelectorAll(".lb-nav").forEach((b) => { b.hidden = !many; });
+  box.querySelector(".lb-controls").hidden = !many;
   box.querySelector(".lb-text").innerHTML = `
     <p class="lb-count">${String(lbIndex + 1).padStart(2, "0")} / ${String(C.projects.length).padStart(2, "0")}</p>
     <h3>${esc(p.title)}</h3>
     <p>${esc(p.desc)}</p>
     ${(p.tags || []).length ? `<div class="tags">${p.tags.map((t) => `<span>${esc(t)}</span>`).join("")}</div>` : ""}
-    ${p.link ? `<p><a href="${esc(p.link)}" target="_blank" rel="noopener">watch project →</a></p>` : ""}`;
+    ${p.link ? `<p><a href="${esc(p.link)}" target="_blank" rel="noopener">Watch project ↗</a></p>` : ""}`;
   if (!box.open) box.showModal();
 }
 
@@ -725,202 +758,40 @@ function wireLightbox() {
   });
 }
 
-// Section titles: wrap each letter so they can animate in. Screen readers get the plain title.
-function splitHeadings() {
-  document.querySelectorAll(".h2:not([data-split])").forEach((h) => {
-    const text = h.textContent.trim();
-    h.dataset.split = "1";
-    h.setAttribute("aria-label", text);
-    h.innerHTML = [...text].map((c, i) =>
-      c === " " ? " " : `<span class="ch" aria-hidden="true" style="--i:${i}">${esc(c)}</span>`).join("");
-  });
+function renderExtras() {
+  const n = C.projects.length;
+  $("#work-count").textContent = `${String(n).padStart(2, "0")} project${n === 1 ? "" : "s"}`;
+  $("#footer-name").textContent = C.site.name;
 }
 
-function renderCta() {
-  const cta = $("#big-cta");
-  if (cta) {
-    const first = C.links[0];
-    cta.hidden = !first;
-    if (first) cta.href = first.url;
-  }
-  const mark = $("#footer-mark");
-  if (mark) mark.textContent = C.site.name;
-}
-
-function renderMarquee() {
-  const track = $("#marquee");
-  if (!track) return;
-  const words = [C.site.name, "animation", "frame by frame", "JoJo Heaven's Arrow", "loops", "poses", "code"];
-  const run = words.map((w) => `<span>${esc(w)}</span><i>✦</i>`).join("");
-  track.innerHTML = run + run; // doubled so the -50% scroll loops seamlessly
-}
-
-/* ---------- Motion: intro, scroll effects, cursor, tilt, magnets, parallax ---------- */
-const reduceMotion = matchMedia("(prefers-reduced-motion: reduce)").matches;
-const finePointer = matchMedia("(hover: hover) and (pointer: fine)").matches;
-
-// Short ink-curtain intro, once per tab. Skipped for owner mode and reduced motion.
-function playIntro() {
-  const root = document.documentElement;
-  let seen = false;
-  try {
-    seen = sessionStorage.getItem("pdd-intro") === "1";
-    sessionStorage.setItem("pdd-intro", "1");
-  } catch { /* storage blocked: just play it */ }
-  if (seen || reduceMotion || new URLSearchParams(location.search).has("edit")) {
-    root.classList.add("hero-in");
-    return;
-  }
-  const el = document.createElement("div");
-  el.className = "intro";
-  el.setAttribute("aria-hidden", "true");
-  el.innerHTML = `<img src="assets/menacing.png" alt=""><span>${esc(C.site.name)}</span>`;
-  document.body.append(el);
-  setTimeout(() => {
-    el.classList.add("out");
-    root.classList.add("hero-in");
-    setTimeout(() => el.remove(), 900);
-  }, 1050);
-}
-
+/* ---------- Header: background once scrolled, hides on the way down, active section ---------- */
 function wireScrollEffects() {
-  const bar = document.createElement("div");
-  bar.className = "progress";
-  bar.setAttribute("aria-hidden", "true");
-  document.body.append(bar);
   const header = $("header.top");
-  const marqueeAnim = () => $("#marquee")?.getAnimations?.()[0];
-
   let lastY = scrollY;
   let queued = false;
-  let mRate = 1;
-  let mDir = 1;
-  let mTicking = false;
-
-  // Marquee speeds up with scroll speed and follows scroll direction, then eases back.
-  const marqueeTick = () => {
-    const a = marqueeAnim();
-    mRate += (1 - mRate) * 0.06;
-    if (a) a.playbackRate = mDir * mRate;
-    if (Math.abs(mRate - 1) > 0.02) requestAnimationFrame(marqueeTick);
-    else mTicking = false;
-  };
-
   const update = () => {
     queued = false;
     const y = scrollY;
     const v = y - lastY;
     lastY = y;
-    const max = document.documentElement.scrollHeight - innerHeight;
-    bar.style.transform = `scaleX(${max > 0 ? Math.min(1, y / max) : 0})`;
-    if (!editing) header.classList.toggle("hide", y > 400 && v > 4);
-    if (v < -4 || editing) header.classList.remove("hide");
-    if (!reduceMotion && v !== 0) {
-      mDir = v < 0 ? -1 : 1;
-      mRate = Math.max(mRate, 1 + Math.min(Math.abs(v) / 6, 6));
-      if (!mTicking) { mTicking = true; requestAnimationFrame(marqueeTick); }
-    }
+    header.classList.toggle("scrolled", y > 8);
+    if (editing || v < -4 || y < 200) header.classList.remove("hide");
+    else if (v > 4) header.classList.add("hide");
   };
   addEventListener("scroll", () => {
     if (!queued) { queued = true; requestAnimationFrame(update); }
   }, { passive: true });
   update();
 
-  // Highlight the nav link for the section on screen.
-  if ("IntersectionObserver" in window) {
-    const links = [...document.querySelectorAll("header nav a")];
-    const obs = new IntersectionObserver((entries) => {
-      entries.forEach((en) => {
-        if (!en.isIntersecting) return;
-        links.forEach((a) => a.classList.toggle("active", a.getAttribute("href") === "#" + en.target.id));
-      });
-    }, { rootMargin: "-45% 0px -50% 0px" });
-    ["home", "reel", "about", "links"].forEach((id) => { const s = document.getElementById(id); if (s) obs.observe(s); });
-  }
-}
-
-function wireCursor() {
-  if (!finePointer || reduceMotion) return;
-  const ring = document.createElement("div");
-  ring.className = "cursor is-hidden";
-  ring.setAttribute("aria-hidden", "true");
-  ring.innerHTML = "<span>view</span>";
-  document.body.append(ring);
-  let x = 0, y = 0, tx = 0, ty = 0, running = false;
-  const tick = () => {
-    x += (tx - x) * 0.22;
-    y += (ty - y) * 0.22;
-    ring.style.transform = `translate(${x}px, ${y}px)`;
-    if (Math.abs(tx - x) + Math.abs(ty - y) > 0.3) requestAnimationFrame(tick);
-    else running = false;
-  };
-  addEventListener("pointermove", (e) => {
-    if (e.pointerType !== "mouse") return;
-    tx = e.clientX;
-    ty = e.clientY;
-    const hit = e.target.closest?.("a, button, .card, summary, [role=button]");
-    ring.classList.toggle("is-hover", !!hit);
-    ring.classList.toggle("is-view", !!hit && hit.classList.contains("card") && !editing);
-    ring.classList.toggle("is-hidden", !!$("#lightbox")?.open);
-    if (!running) { running = true; requestAnimationFrame(tick); }
-  }, { passive: true });
-  document.documentElement.addEventListener("pointerleave", () => ring.classList.add("is-hidden"));
-}
-
-// Cards lean toward the mouse, with a soft glare that follows it.
-function wireTilt() {
-  if (!finePointer || reduceMotion) return;
-  const projects = $("#projects");
-  projects.addEventListener("pointermove", (e) => {
-    if (editing) return;
-    const card = e.target.closest(".card");
-    if (!card) return;
-    const r = card.getBoundingClientRect();
-    const px = (e.clientX - r.left) / r.width;
-    const py = (e.clientY - r.top) / r.height;
-    card.classList.add("tilting");
-    card.style.transform = `perspective(900px) rotateX(${((0.5 - py) * 9).toFixed(2)}deg) rotateY(${((px - 0.5) * 11).toFixed(2)}deg) translate(-4px, -6px)`;
-    card.style.setProperty("--mx", `${(px * 100).toFixed(1)}%`);
-    card.style.setProperty("--my", `${(py * 100).toFixed(1)}%`);
-  });
-  projects.addEventListener("pointerout", (e) => {
-    const card = e.target.closest(".card");
-    if (!card || card.contains(e.relatedTarget)) return;
-    card.classList.remove("tilting");
-    card.style.transform = "";
-  });
-}
-
-// Buttons drift a little toward the mouse.
-function wireMagnets() {
-  if (!finePointer || reduceMotion) return;
-  let current = null;
-  addEventListener("pointermove", (e) => {
-    const m = editing ? null : e.target.closest?.(".links a, .nav-cta, .big-cta img, .lb-nav, .lb-close");
-    if (m !== current) {
-      if (current) current.style.translate = "";
-      current = m;
-    }
-    if (!m) return;
-    const r = m.getBoundingClientRect();
-    m.style.translate = `${((e.clientX - r.left - r.width / 2) * 0.25).toFixed(1)}px ${((e.clientY - r.top - r.height / 2) * 0.35).toFixed(1)}px`;
-  }, { passive: true });
-}
-
-// Hero decorations float against the mouse at different depths.
-function wireParallax() {
-  if (!finePointer || reduceMotion) return;
-  const hero = $(".hero");
-  hero.addEventListener("pointermove", (e) => {
-    if (editing) return;
-    const r = hero.getBoundingClientRect();
-    hero.style.setProperty("--px", (((e.clientX - r.left) / r.width - 0.5) * 2).toFixed(3));
-    hero.style.setProperty("--py", (((e.clientY - r.top) / r.height - 0.5) * 2).toFixed(3));
-  });
-  hero.addEventListener("pointerleave", () => {
-    hero.style.setProperty("--px", 0);
-    hero.style.setProperty("--py", 0);
-  });
+  if (!("IntersectionObserver" in window)) return;
+  const links = [...document.querySelectorAll("header nav a")];
+  const obs = new IntersectionObserver((entries) => {
+    entries.forEach((en) => {
+      if (!en.isIntersecting) return;
+      links.forEach((a) => a.classList.toggle("active", a.getAttribute("href") === "#" + en.target.id));
+    });
+  }, { rootMargin: "-45% 0px -50% 0px" });
+  ["home", "work", "about", "contact"].forEach((id) => { const el = document.getElementById(id); if (el) obs.observe(el); });
 }
 
 function updateProjectSelection() {
@@ -973,14 +844,12 @@ function renderPage() {
  
   renderCanvas();
   $("#projects").innerHTML = C.projects.map(projectCard).join("");
-  renderMarquee();
-  renderCta();
+  renderExtras();
   $("#about-body").innerHTML = C.about.split("\n").filter(Boolean).map((p) => `<p>${esc(p)}</p>`).join("");
   $("#links-body").innerHTML = C.links.map((l) =>
     `<a href="${esc(l.url)}" target="_blank" rel="noopener">${esc(l.label)}</a>`).join("");
   wireCardHover();
   updateProjectSelection();
-  splitHeadings();
   observeReveals();
 }
  
@@ -1348,10 +1217,12 @@ function itemForm(it) {
       <label>Weight<select ${t} data-key="style.weight">${[400, 700, 900].map((w) => opt(w, Number(s.weight), w)).join("")}</select></label>
       <label>Alignment<select ${t} data-key="style.align">${["left", "center", "right"].map((a) => opt(a, s.align, a)).join("")}</select></label>
       <label>Text colour<input type="color" ${t} data-key="style.color" value="${color}"></label>
+      <label>Letter spacing (em, e.g. -0.03 or 0.08)<input type="number" step="0.005" ${t} data-key="style.tracking" value="${s.tracking || 0}"></label>
+      <label>Line height (e.g. 1.05 or 1.5)<input type="number" step="0.05" ${t} data-key="style.leading" value="${s.leading || 1.15}"></label>
       <label><input type="checkbox" ${t} data-key="style.textShadow" ${s.textShadow ? "checked" : ""}> Accent text shadow</label>` : ""}
     <label>Background (colour, or "transparent")<input ${t} data-key="style.bg" value="${esc(s.bg || "transparent")}"></label>
     <label>Border (CSS, e.g. 3px solid #1d1d1d)<input ${t} data-key="style.border" value="${esc(s.border || "")}"></label>
-    <label><input type="checkbox" ${t} data-key="style.shadow" ${s.shadow ? "checked" : ""}> Hard shadow</label>
+    <label><input type="checkbox" ${t} data-key="style.shadow" ${s.shadow ? "checked" : ""}> Soft shadow</label>
     <label><input type="checkbox" ${t} data-key="locked" ${it.locked ? "checked" : ""}> Lock (can't be moved)</label>
     <div class="row">
       <button data-act="item-fwd">bring forward</button>
@@ -1398,9 +1269,9 @@ function projectForm(p, i) {
       <label>Border (CSS)<input ${t} data-key="style.border" value="${esc(s.border || "")}" placeholder="2px solid #1d1d1d"></label>
       <label>Corner radius (CSS)<input ${t} data-key="style.radius" value="${esc(s.radius || "")}"></label>
       <label>Card background (colour)<input ${t} data-key="style.bg" value="${esc(s.bg || "")}" placeholder="e.g. #fffdf7"></label>
-      <label>Padding (CSS)<input ${t} data-key="style.padding" value="${esc(s.padding || "")}" placeholder="14px 14px 18px"></label>
+      <label>Padding (CSS)<input ${t} data-key="style.padding" value="${esc(s.padding || "")}" placeholder="0"></label>
       <label>Opacity<input type="range" min="0" max="1" step="0.05" ${t} data-key="style.opacity" value="${s.opacity === undefined ? 1 : s.opacity}"></label>
-      <label>${s.shadow === false ? `<input type="checkbox" ${t} data-key="style.shadow"> Hard shadow` : `<input type="checkbox" ${t} data-key="style.shadow" checked> Hard shadow`}</label>
+      <label><input type="checkbox" ${t} data-key="style.shadow" ${s.shadow === true ? "checked" : ""}> Soft shadow</label>
  
       <h4>Thumbnail / GIF</h4>
       <div class="row">
@@ -1847,10 +1718,6 @@ function init() {
   document.documentElement.classList.add("js");
   wireLightbox();
   wireScrollEffects();
-  wireCursor();
-  wireTilt();
-  wireMagnets();
-  wireParallax();
   const canvas = $("#canvas");
   canvas.addEventListener("pointerdown", onCanvasDown);
   canvas.addEventListener("dblclick", onCanvasDbl);
@@ -1864,7 +1731,7 @@ function init() {
   document.addEventListener("click", onAct);
  
   renderPage();
-  playIntro();
+  document.documentElement.classList.add("hero-in");
   if (new URLSearchParams(location.search).has("edit")) openOwnerMode();
 }
  
