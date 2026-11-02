@@ -288,11 +288,15 @@ const CONTENT = {
       }
     }
   ],
-  "about": "I'm PenguinDoDrip. I'm one of the animators for JoJo Heaven's Arrow, and I'm also a programmer.\n\nMost of my stuff is JoJo poses and idles for the mod. When I'm not animating I'm usually coding something, or playing chess every once in a while.",
+  "about": "I'm PenguinDoDrip. I've been animating for 3+ years, and right now I'm one of the animators for JoJo Heaven's Arrow. I'm also a programmer.\n\nMost of my stuff is JoJo poses and idles for the mod, all made in Blockbench. When I'm not animating I'm usually coding something, or playing chess every once in a while.",
   "links": [
     {
       "label": "YouTube",
       "url": "https://youtube.com/@PenguinDoDrip"
+    },
+    {
+      "label": "Discord",
+      "url": "copy:penguindodrip"
     }
   ]
 };
@@ -758,6 +762,37 @@ function wireLightbox() {
   });
 }
 
+// A contact row. "copy:something" (for a Discord username, say) copies the text instead of opening a page.
+function linkRow(l) {
+  const url = String(l.url || "");
+  if (url.startsWith("copy:")) {
+    const text = url.slice(5);
+    return `<button type="button" class="copy" data-copy="${esc(text)}">
+      <span class="link-label">${esc(l.label)}</span>
+      <span class="link-meta">${esc(text)} <span class="copy-hint">· click to copy</span></span></button>`;
+  }
+  const shown = url.replace(/^https?:\/\/(www\.)?/, "").replace(/\/$/, "");
+  return `<a href="${esc(url)}" target="_blank" rel="noopener">
+    <span class="link-label">${esc(l.label)}</span>
+    <span class="link-meta">${esc(shown)}</span></a>`;
+}
+
+function wireCopyLinks() {
+  $("#links-body").addEventListener("click", async (e) => {
+    const b = e.target.closest("button[data-copy]");
+    if (!b || editing) return;
+    const hint = b.querySelector(".copy-hint");
+    try {
+      await navigator.clipboard.writeText(b.dataset.copy);
+      hint.textContent = "· copied!";
+    } catch {
+      hint.textContent = "· couldn't copy, it's " + b.dataset.copy;
+    }
+    clearTimeout(b._t);
+    b._t = setTimeout(() => { hint.textContent = "· click to copy"; }, 1800);
+  });
+}
+
 function renderExtras() {
   const n = C.projects.length;
   $("#work-count").textContent = `${String(n).padStart(2, "0")} project${n === 1 ? "" : "s"}`;
@@ -791,7 +826,7 @@ function wireScrollEffects() {
       links.forEach((a) => a.classList.toggle("active", a.getAttribute("href") === "#" + en.target.id));
     });
   }, { rootMargin: "-45% 0px -50% 0px" });
-  ["home", "work", "about", "contact"].forEach((id) => { const el = document.getElementById(id); if (el) obs.observe(el); });
+  ["home", "work", "mod", "about", "tools", "faq", "contact"].forEach((id) => { const el = document.getElementById(id); if (el) obs.observe(el); });
 }
 
 function updateProjectSelection() {
@@ -846,8 +881,7 @@ function renderPage() {
   $("#projects").innerHTML = C.projects.map(projectCard).join("");
   renderExtras();
   $("#about-body").innerHTML = C.about.split("\n").filter(Boolean).map((p) => `<p>${esc(p)}</p>`).join("");
-  $("#links-body").innerHTML = C.links.map((l) =>
-    `<a href="${esc(l.url)}" target="_blank" rel="noopener">${esc(l.label)}</a>`).join("");
+  $("#links-body").innerHTML = C.links.map(linkRow).join("");
   wireCardHover();
   updateProjectSelection();
   observeReveals();
@@ -1343,7 +1377,8 @@ function siteForm() {
         <input data-target="link" data-index="${i}" data-key="url" value="${esc(l.url)}" placeholder="https://">
         <button data-act="link-del" data-index="${i}">✕</button>
       </div>`).join("")}
-    <button data-act="link-add">+ add link</button>`;
+    <button data-act="link-add">+ add link</button>
+    <p class="hint">Tip: a link like <code>copy:yourname</code> makes a row that copies the text when clicked, handy for a Discord username.</p>`;
 }
  
 function refreshPanel() {
@@ -1718,6 +1753,7 @@ function init() {
   document.documentElement.classList.add("js");
   wireLightbox();
   wireScrollEffects();
+  wireCopyLinks();
   const canvas = $("#canvas");
   canvas.addEventListener("pointerdown", onCanvasDown);
   canvas.addEventListener("dblclick", onCanvasDbl);
