@@ -51,15 +51,15 @@ const ph = (label, bg = "#ffd166", fg = "#1d1d1d") =>
 /* CONTENT:START */
 const CONTENT = {
   "identity": {
-    "title": "PenguinDoDrip — Animator",
-    "description": "Character animator and programmer on JoJo Heaven's Arrow. Poses, loops and idle animations.",
+    "title": "PenguinDoDrip's Portfolio",
+    "description": "PenguinDoDrip's portfolio. Animator for JoJo Heaven's Arrow and programmer.",
     "favicon": "assets/favicon-7.jpg",
     "shareImage": "assets/share-image-8.jpg",
     "shareTitle": "PenguinDoDrip's Portfolio",
     "shareDescription": ""
   },
   "site": {
-    "title": "PenguinDoDrip — Animator",
+    "title": "PenguinDoDrip's Portfolio",
     "name": "PenguinDoDrip"
   },
   "theme": {
@@ -72,7 +72,7 @@ const CONTENT = {
     {
       "id": "t-eyebrow",
       "kind": "text",
-      "text": "ANIMATOR & PROGRAMMER — JOJO HEAVEN'S ARROW",
+      "text": "ANIMATOR · PROGRAMMER",
       "x": 0,
       "y": 17,
       "w": 56,
@@ -94,7 +94,7 @@ const CONTENT = {
     {
       "id": "t-hello",
       "kind": "text",
-      "text": "Character animation\nthat lands every pose.",
+      "text": "Hi, I'm\nPenguinDoDrip.",
       "x": 0,
       "y": 24,
       "w": 62,
@@ -102,7 +102,7 @@ const CONTENT = {
       "z": 5,
       "locked": false,
       "style": {
-        "fontSize": 52,
+        "fontSize": 62,
         "fontFamily": "'Inter Tight',Inter,system-ui,sans-serif",
         "weight": 600,
         "color": "#17131f",
@@ -117,9 +117,9 @@ const CONTENT = {
     {
       "id": "t-tag",
       "kind": "text",
-      "text": "I'm PenguinDoDrip, an animator on JoJo Heaven's Arrow and a programmer. I make poses, loops and idle cycles with weight, timing and attitude.",
+      "text": "I'm one of the animators for JoJo Heaven's Arrow, and I also code. Most of what I make is poses and idle animations for the mod.",
       "x": 0,
-      "y": 51,
+      "y": 53,
       "w": 40,
       "rot": 0,
       "z": 4,
@@ -139,7 +139,7 @@ const CONTENT = {
     {
       "id": "btn-reel",
       "kind": "button",
-      "text": "View selected work  →",
+      "text": "See my animations  →",
       "href": "#work",
       "x": 0,
       "y": 73,
@@ -216,7 +216,7 @@ const CONTENT = {
     {
       "id": "p2",
       "title": "Dio Pose",
-      "desc": "A signature Dio pose, animated for the JoJo Heaven's Arrow mod.",
+      "desc": "A JoJo pose I made for the mod JoJo Heaven's Arrow.",
       "thumb": "assets/project1-thumb-3.gif",
       "preview": "",
       "link": "",
@@ -241,7 +241,7 @@ const CONTENT = {
     {
       "id": "p1",
       "title": "Jotaro Pose",
-      "desc": "Jotaro's stance, animated for JoJo Heaven's Arrow.",
+      "desc": "Another one I made for JoJo Heaven's Arrow. Jotaro this time.",
       "thumb": "assets/project2-thumb-5.gif",
       "preview": "",
       "link": "",
@@ -264,8 +264,8 @@ const CONTENT = {
     },
     {
       "id": "p3",
-      "title": "Idle Approaching Me Animation",
-      "desc": "An idle loop recreating the iconic \"Approaching Me\" manga panel.",
+      "title": "Approaching Me Idle",
+      "desc": "The pose from the \"Approaching Me\" manga panel, turned into an idle.",
       "thumb": "assets/project3-thumb-6.gif",
       "preview": "",
       "link": "",
@@ -288,7 +288,7 @@ const CONTENT = {
       }
     }
   ],
-  "about": "I'm PenguinDoDrip, one of the animators behind JoJo Heaven's Arrow, and a programmer too. I live for poses that go unreasonably hard and loops that never get old.\n\nWhen I'm not animating, I'm writing code or playing chess every once in a while.",
+  "about": "I'm PenguinDoDrip. I'm one of the animators for JoJo Heaven's Arrow, and I'm also a programmer.\n\nMost of my stuff is JoJo poses and idles for the mod. When I'm not animating I'm usually coding something, or playing chess every once in a while.",
   "links": [
     {
       "label": "YouTube",
