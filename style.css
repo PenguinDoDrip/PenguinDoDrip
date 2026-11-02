@@ -198,21 +198,16 @@ header nav a.nav-cta:hover { background: var(--accent); color: #fff; }
   align-items: center;
   gap: 0.5em;
   padding: 0.85em 1.5em;
-  background: var(--accent);
-  color: #fff;
+  background: var(--ink);
+  color: var(--paper);
   font-family: var(--font);
   font-weight: 500;
   text-decoration: none;
   white-space: nowrap;
   border-radius: 999px;
-  box-shadow: 0 10px 30px -10px color-mix(in srgb, var(--accent) 70%, transparent);
-  transition: background 0.25s, translate 0.25s var(--ease), box-shadow 0.25s;
+  transition: background 0.25s;
 }
-.item.button .btn:hover {
-  background: var(--ink);
-  translate: 0 -2px;
-  box-shadow: 0 14px 30px -12px color-mix(in srgb, var(--ink) 60%, transparent);
-}
+.item.button .btn:hover { background: var(--accent); color: #fff; }
 .item.sticker img { filter: drop-shadow(0 8px 16px rgba(0, 0, 0, 0.18)); }
 body:not(.editing) .item.image, body:not(.editing) .item.sticker { transition: translate 0.5s var(--ease); }
 body:not(.editing) .item.image:hover { translate: 0 -4px; }
