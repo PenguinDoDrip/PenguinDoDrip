@@ -295,7 +295,7 @@ body.editing .card.sel { outline: 2px solid var(--accent); outline-offset: 6px; 
 }
 .card:hover .thumb > video, .card:hover .thumb > .preview { opacity: 1; }
 .thumb::after {
-  content: "View project";
+  content: "Watch";
   position: absolute;
   left: 16px;
   bottom: 16px;
