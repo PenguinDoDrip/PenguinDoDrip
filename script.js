@@ -17,10 +17,8 @@ const CONFIG = {
 };
  
 const FONTS = [
-  { label: "Display (Inter Tight)", value: "'Inter Tight',Inter,system-ui,sans-serif" },
-  { label: "Body (Inter)", value: "Inter,system-ui,sans-serif" },
-  { label: "Elegant serif (Instrument Serif)", value: "'Instrument Serif',Georgia,serif" },
-  { label: "Label mono (JetBrains Mono)", value: "'JetBrains Mono','Courier New',monospace" },
+  { label: "Archivo (headlines & body)", value: "Archivo,'Arial Narrow',Arial,sans-serif" },
+  { label: "Label mono (IBM Plex Mono)", value: "'IBM Plex Mono','Courier New',monospace" },
   { label: "Handwritten", value: "'Brush Script MT','Segoe Script',cursive" },
   { label: "Friendly sans", value: "'Trebuchet MS',Verdana,sans-serif" },
   { label: "Serif", value: "Georgia,'Times New Roman',serif" },
@@ -72,46 +70,47 @@ const CONTENT = {
     {
       "id": "t-eyebrow",
       "kind": "text",
-      "text": "ANIMATOR · PROGRAMMER",
+      "text": "ANIMATOR · PROGRAMMER · JOJO HEAVEN'S ARROW",
       "x": 0,
-      "y": 17,
-      "w": 56,
+      "y": 2,
+      "w": 60,
       "rot": 0,
       "z": 4,
       "locked": false,
       "style": {
-        "fontSize": 11,
-        "fontFamily": "'JetBrains Mono','Courier New',monospace",
+        "fontSize": 10.5,
+        "fontFamily": "'IBM Plex Mono','Courier New',monospace",
         "weight": 400,
-        "color": "#6b6475",
+        "color": "#9d95a8",
         "align": "left",
         "bg": "transparent",
         "border": "",
         "shadow": false,
-        "tracking": 0.08
+        "tracking": 0.12
       }
     },
     {
       "id": "t-hello",
       "kind": "text",
-      "text": "Hi, I'm\nPenguinDoDrip.",
+      "text": "HI, I'M\nPENGUINDODRIP.",
       "x": 0,
-      "y": 24,
-      "w": 62,
+      "y": 17,
+      "w": 100,
       "rot": 0,
       "z": 5,
       "locked": false,
       "style": {
-        "fontSize": 62,
-        "fontFamily": "'Inter Tight',Inter,system-ui,sans-serif",
-        "weight": 600,
-        "color": "#17131f",
+        "fontSize": 80,
+        "fontFamily": "Archivo,'Arial Narrow',Arial,sans-serif",
+        "weight": 800,
+        "color": "#f4eee3",
         "align": "left",
         "bg": "transparent",
         "border": "",
         "shadow": false,
-        "tracking": -0.045,
-        "leading": 1.02
+        "stretch": 112,
+        "tracking": -0.04,
+        "leading": 0.86
       }
     },
     {
@@ -119,16 +118,16 @@ const CONTENT = {
       "kind": "text",
       "text": "I'm one of the animators for JoJo Heaven's Arrow, and I also code. Most of what I make is poses and idle animations for the mod.",
       "x": 0,
-      "y": 53,
-      "w": 40,
+      "y": 63,
+      "w": 36,
       "rot": 0,
       "z": 4,
       "locked": false,
       "style": {
-        "fontSize": 14.5,
-        "fontFamily": "Inter,system-ui,sans-serif",
+        "fontSize": 14,
+        "fontFamily": "Archivo,'Arial Narrow',Arial,sans-serif",
         "weight": 400,
-        "color": "#4a4453",
+        "color": "#bdb5c6",
         "align": "left",
         "bg": "transparent",
         "border": "",
@@ -139,16 +138,16 @@ const CONTENT = {
     {
       "id": "btn-reel",
       "kind": "button",
-      "text": "See my animations  →",
+      "text": "See my animations  ↓",
       "href": "#work",
       "x": 0,
-      "y": 73,
-      "w": 24,
+      "y": 85,
+      "w": 30,
       "rot": 0,
       "z": 7,
       "locked": false,
       "style": {
-        "fontSize": 12.5,
+        "fontSize": 13,
         "bg": "transparent",
         "border": "",
         "shadow": false
@@ -159,16 +158,16 @@ const CONTENT = {
       "kind": "image",
       "src": "assets/image-1.gif",
       "alt": "Jotaro pose animation",
-      "x": 63,
-      "y": 2,
-      "w": 34,
-      "rot": 0,
+      "x": 71,
+      "y": 0,
+      "w": 22,
+      "rot": 3,
       "z": 2,
       "locked": false,
       "style": {
         "border": "",
-        "radius": "28px",
-        "shadow": false,
+        "radius": "0",
+        "shadow": true,
         "bg": "#f59b51"
       },
       "media": {
@@ -189,9 +188,9 @@ const CONTENT = {
       "kind": "sticker",
       "src": "assets/sticker-2.gif",
       "alt": "",
-      "x": 55.5,
-      "y": 64,
-      "w": 11,
+      "x": 62,
+      "y": 52,
+      "w": 8.5,
       "rot": 0,
       "z": 6,
       "locked": false,
@@ -570,8 +569,13 @@ function applyGeometry(el, item) {
 }
  
 // Font sizes are authored for a 900px-wide canvas and scale with it.
-// Never shrinks below a readable size, so small text stays legible on phones.
-const scaledPx = (px) => `max(${Math.min(px, Math.max(15, px * 0.6))}px, calc(${px} * 100cqw / 900))`;
+// Small text never shrinks below a readable size on phones; big headlines still shrink
+// enough to fit a narrow screen.
+const scaledPx = (px) => {
+  const floor = Math.min(px, Math.max(15, px * 0.6));
+  const min = px >= 40 ? `min(${floor}px, ${(px * 0.115).toFixed(2)}cqw)` : `${floor}px`;
+  return `max(${min}, calc(${px} * 100cqw / 900))`;
+};
  
 function itemEl(item, i = 0) {
   const el = document.createElement("div");
@@ -598,6 +602,7 @@ function itemEl(item, i = 0) {
     el.style.textShadow = s.textShadow ? "0.045em 0.045em 0 var(--accent)" : "none";
     el.style.letterSpacing = s.tracking ? `${s.tracking}em` : "normal";
     el.style.lineHeight = s.leading || "";
+    el.style.fontStretch = s.stretch ? `${s.stretch}%` : "";
     // Only boxed text (background or border) gets inner padding, so plain text lines up flush.
     const boxed = (s.bg && s.bg !== "transparent") || s.border;
     el.style.padding = boxed ? "0.2em 0.4em" : "0";
@@ -635,47 +640,56 @@ function previewHTML(p, cls = "") {
     : `<video class="${cls}" src="${src}" muted loop playsinline></video>`;
 }
 
+// Each project is a full-width band: giant title, the GIF on top of it, details around the edge.
+// Bands alternate dark and light, starting dark under the light "Work" header.
 function projectCard(p, i) {
   const s = p.style || {};
   const show = showOf(p);
-  const above = s.textOrder === "above";
   const thumbMedia = { id: p.id, kind: "image", src: p.thumb, alt: p.title, media: p.media };
   const tm = mediaOf(thumbMedia);
- 
+  const nat = natOf(tm);
+  const tone = i % 2 === 0 ? "dark" : "light";
+  const num = String(i + 1).padStart(2, "0");
+
   const css = [
-    p.rot !== undefined ? `--rot:${p.rot}deg` : "",
+    p.rot !== undefined ? `--tilt:${p.rot}deg` : "",
     s.border ? `border:${s.border}` : "",
-    s.radius ? `border-radius:${s.radius}` : "",
-    s.shadow === true ? "box-shadow:0 24px 60px -24px rgba(15, 10, 30, 0.35)" : "",
     s.bg ? `background:${s.bg}` : "",
     s.padding ? `padding:${s.padding}` : "",
     `opacity:${s.opacity === undefined ? 1 : s.opacity}`,
-    `text-align:${s.align || "left"}`,
-    p.featured ? "grid-column: span 2" : "",
   ].filter(Boolean).join(";");
- 
-  const thumb = `
-    <div class="thumb" style="order:${above ? 2 : 1};aspect-ratio:${frameAspectCSS(tm)}">
-      <div class="media-frame" style="background:${tm.bg}">${mediaInnerHTML(thumbMedia)}</div>
-      ${p.preview ? previewHTML(p) : ""}
-    </div>`;
- 
+
   const title = show.title
-    ? `<h3 style="font-size:${s.titleSize || 1.2}rem;color:${s.titleColor || "inherit"}">${esc(p.title)}</h3>` : "<span></span>";
-  const num = `<span class="card-num" aria-hidden="true">${String(i + 1).padStart(2, "0")}</span>`;
-  const desc = show.desc ? `<p>${esc(p.desc)}</p>` : "";
+    ? `<h3 class="band-title" style="${s.titleColor ? `color:${s.titleColor}` : ""}">${esc(p.title)}</h3>` : "";
+  const desc = show.desc ? `<p class="band-desc">${esc(p.desc)}</p>` : "";
   const tags = show.tags && (p.tags || []).length
-    ? `<div class="tags">${p.tags.map((t) => `<span>${esc(t)}</span>`).join("")}</div>` : "";
+    ? `<div class="tags">${p.tags.map((t) => `<span>${esc(t)}</span>`).join("")}</div>` : "<span></span>";
   const link = show.link && p.link
-    ? `<a href="${esc(p.link)}" target="_blank" rel="noopener">Watch project ↗</a>` : "";
- 
+    ? `<a class="band-cta" href="${esc(p.link)}" target="_blank" rel="noopener">Watch project <span aria-hidden="true">↗</span></a>` : "";
+
   return `
-    <article class="card${revealed.has(p.id) ? " in" : ""}" data-pid="${esc(p.id)}" style="${css}" tabindex="0" aria-label="Open ${esc(p.title)}">
-      ${thumb}
-      <div class="card-text" style="order:${above ? 1 : 2}"><div class="card-head">${title}${num}</div>${desc}${tags}${link}</div>
+    <article class="card band${revealed.has(p.id) ? " in" : ""}" data-tone="${tone}" data-pid="${esc(p.id)}" style="${css}" tabindex="0" aria-label="Open ${esc(p.title)}">
+      <div class="band-top">
+        <p class="band-label">Work <span class="label-num">${num}</span> / ${esc((p.tags || [])[1] || (p.tags || [])[0] || "Animation")}</p>
+        ${desc}
+      </div>
+      <div class="band-stage">
+        ${title}
+        <figure class="band-fig">
+          <div class="thumb" style="aspect-ratio:${frameAspectCSS(tm)}">
+            <div class="media-frame" style="background:${tm.bg}">${mediaInnerHTML(thumbMedia)}</div>
+            ${p.preview ? previewHTML(p) : ""}
+          </div>
+          <figcaption><span>Fig. ${num}</span><span>${nat ? `${nat.w} × ${nat.h}` : ""}</span></figcaption>
+        </figure>
+      </div>
+      <div class="band-bottom">
+        ${tags}
+        <div class="band-ctas">${link}<span class="band-cta">View it big <span aria-hidden="true">↗</span></span></div>
+      </div>
     </article>`;
 }
- 
+
 function wireCardHover() {
   document.querySelectorAll(".card").forEach((card) => {
     const v = card.querySelector("video");
@@ -793,13 +807,35 @@ function wireCopyLinks() {
   });
 }
 
+// Project titles fill the band width on one line, whatever their length.
+function fitBandTitles() {
+  document.querySelectorAll(".band-title").forEach((h) => {
+    const avail = h.parentElement.clientWidth;
+    if (!avail) return;
+    h.style.fontSize = "100px";
+    const fs = Math.max(20, Math.min(250, (avail / h.offsetWidth) * 100 * 0.98));
+    h.style.fontSize = `${fs.toFixed(1)}px`;
+    h.closest(".band").style.setProperty("--fs", `${fs.toFixed(1)}px`);
+  });
+}
+
 function renderExtras() {
   const n = C.projects.length;
   $("#work-count").textContent = `${String(n).padStart(2, "0")} project${n === 1 ? "" : "s"}`;
   $("#footer-name").textContent = C.site.name;
 }
 
-/* ---------- Header: background once scrolled, hides on the way down, active section ---------- */
+/* ---------- Header: hides on the way down, follows the band colour, marks the active link ---------- */
+// Header text is dark over light bands and light over dark ones: check what sits under it.
+function updateHeaderTone() {
+  const header = $("header.top");
+  const y = header.getBoundingClientRect().bottom - 8;
+  const under = document.elementsFromPoint(innerWidth / 2, Math.max(1, y))
+    .map((el) => el.closest("[data-tone]"))
+    .find((el) => el && !header.contains(el));
+  if (under) header.classList.toggle("on-light", under.dataset.tone === "light");
+}
+
 function wireScrollEffects() {
   const header = $("header.top");
   let lastY = scrollY;
@@ -809,9 +845,9 @@ function wireScrollEffects() {
     const y = scrollY;
     const v = y - lastY;
     lastY = y;
-    header.classList.toggle("scrolled", y > 8);
     if (editing || v < -4 || y < 200) header.classList.remove("hide");
     else if (v > 4) header.classList.add("hide");
+    updateHeaderTone();
   };
   addEventListener("scroll", () => {
     if (!queued) { queued = true; requestAnimationFrame(update); }
@@ -826,7 +862,38 @@ function wireScrollEffects() {
       links.forEach((a) => a.classList.toggle("active", a.getAttribute("href") === "#" + en.target.id));
     });
   }, { rootMargin: "-45% 0px -50% 0px" });
-  ["home", "work", "mod", "about", "tools", "faq", "contact"].forEach((id) => { const el = document.getElementById(id); if (el) obs.observe(el); });
+  ["home", "work", "mod", "about", "faq", "contact"].forEach((id) => { const el = document.getElementById(id); if (el) obs.observe(el); });
+}
+
+// Short intro, once per tab: a frame counter runs 01 to 24, then the curtain lifts.
+function playIntro(done) {
+  let seen = false;
+  try {
+    seen = sessionStorage.getItem("pdd-intro") === "1";
+    sessionStorage.setItem("pdd-intro", "1");
+  } catch { /* storage blocked: just play it */ }
+  if (seen || matchMedia("(prefers-reduced-motion: reduce)").matches || new URLSearchParams(location.search).has("edit")) {
+    done();
+    return;
+  }
+  const el = document.createElement("div");
+  el.className = "intro";
+  el.setAttribute("aria-hidden", "true");
+  el.innerHTML = `<img src="assets/menacing.png" alt=""><p class="intro-count">Frame <b>01</b> / 24</p>`;
+  document.body.append(el);
+  const b = el.querySelector("b");
+  let f = 1;
+  const tick = setInterval(() => {
+    f += 1;
+    b.textContent = String(f).padStart(2, "0");
+    if (f < 24) return;
+    clearInterval(tick);
+    setTimeout(() => {
+      el.classList.add("out");
+      done();
+      setTimeout(() => el.remove(), 1000);
+    }, 180);
+  }, 1000 / 24);
 }
 
 function updateProjectSelection() {
@@ -885,6 +952,8 @@ function renderPage() {
   wireCardHover();
   updateProjectSelection();
   observeReveals();
+  fitBandTitles();
+  updateHeaderTone();
 }
  
 /* ============================================================
@@ -1253,6 +1322,7 @@ function itemForm(it) {
       <label>Text colour<input type="color" ${t} data-key="style.color" value="${color}"></label>
       <label>Letter spacing (em, e.g. -0.03 or 0.08)<input type="number" step="0.005" ${t} data-key="style.tracking" value="${s.tracking || 0}"></label>
       <label>Line height (e.g. 1.05 or 1.5)<input type="number" step="0.05" ${t} data-key="style.leading" value="${s.leading || 1.15}"></label>
+      <label>Width % (Archivo only: 62 narrow → 125 wide)<input type="number" step="1" ${t} data-key="style.stretch" value="${s.stretch || 100}"></label>
       <label><input type="checkbox" ${t} data-key="style.textShadow" ${s.textShadow ? "checked" : ""}> Accent text shadow</label>` : ""}
     <label>Background (colour, or "transparent")<input ${t} data-key="style.bg" value="${esc(s.bg || "transparent")}"></label>
     <label>Border (CSS, e.g. 3px solid #1d1d1d)<input ${t} data-key="style.border" value="${esc(s.border || "")}"></label>
@@ -1754,6 +1824,9 @@ function init() {
   wireLightbox();
   wireScrollEffects();
   wireCopyLinks();
+  document.fonts?.ready.then(fitBandTitles);
+  let fitTimer;
+  addEventListener("resize", () => { clearTimeout(fitTimer); fitTimer = setTimeout(fitBandTitles, 120); });
   const canvas = $("#canvas");
   canvas.addEventListener("pointerdown", onCanvasDown);
   canvas.addEventListener("dblclick", onCanvasDbl);
@@ -1767,7 +1840,7 @@ function init() {
   document.addEventListener("click", onAct);
  
   renderPage();
-  document.documentElement.classList.add("hero-in");
+  playIntro(() => document.documentElement.classList.add("hero-in"));
   if (new URLSearchParams(location.search).has("edit")) openOwnerMode();
 }
  
