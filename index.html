@@ -25,6 +25,144 @@
   <script src="script.js?v=2026-11-03b" defer></script>
 </head>
 <body>
+  <style>
+    html.ti-lock, html.ti-lock body { overflow: hidden !important; }
+    #terminal-intro {
+      position: fixed;
+      inset: 0;
+      z-index: 99999;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+      padding: clamp(24px, 6vw, 72px);
+      background: #0d1117;
+      color: #c9d1d9;
+      font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace;
+      font-size: clamp(14px, 1.6vw, 18px);
+      line-height: 1.7;
+      cursor: pointer;
+      transition: transform 0.6s cubic-bezier(0.7, 0, 0.2, 1), opacity 0.6s ease;
+    }
+    #terminal-intro::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      background: repeating-linear-gradient(0deg, rgba(255, 255, 255, 0.03) 0 1px, transparent 1px 3px);
+    }
+    #terminal-intro.ti-out { transform: translateY(-100%); }
+    #terminal-intro.ti-glitch { animation: ti-glitch 0.24s steps(2) both; }
+    #terminal-intro.ti-glitch::after { background: repeating-linear-gradient(0deg, rgba(255, 255, 255, 0.12) 0 1px, transparent 1px 3px); }
+    .ti-line { margin: 0; white-space: pre-wrap; word-break: break-word; }
+    .ti-user { color: #7ee787; }
+    .ti-path { color: #79c0ff; }
+    .ti-dir { color: #79c0ff; font-weight: 700; }
+    .ti-out-line { display: flex; flex-wrap: wrap; gap: 0 2.5em; margin: 0; }
+    .ti-cursor {
+      display: inline-block;
+      width: 0.6em;
+      height: 1.1em;
+      margin-left: 2px;
+      vertical-align: -0.2em;
+      background: #c9d1d9;
+      animation: ti-blink 1s steps(1) infinite;
+    }
+    .ti-skip {
+      position: absolute;
+      right: clamp(16px, 4vw, 40px);
+      bottom: clamp(16px, 4vw, 40px);
+      padding: 6px 12px;
+      font: inherit;
+      font-size: 13px;
+      color: #8b949e;
+      background: transparent;
+      border: 1px solid #30363d;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+    .ti-skip:hover, .ti-skip:focus-visible { color: #c9d1d9; border-color: #8b949e; outline: none; }
+    @keyframes ti-blink { 50% { opacity: 0; } }
+    @keyframes ti-glitch {
+      0% { clip-path: inset(10% 0 60% 0); transform: translate(-6px, 0); filter: hue-rotate(90deg); }
+      50% { clip-path: inset(55% 0 15% 0); transform: translate(6px, 0); filter: hue-rotate(-90deg); }
+      100% { clip-path: inset(0 0 0 0); transform: none; filter: none; }
+    }
+  </style>
+  <div id="terminal-intro" aria-hidden="true">
+    <p class="ti-line"><span class="ti-user">penguin@portfolio</span>:<span class="ti-path">~</span>$ <span class="ti-typed"></span><span class="ti-cursor"></span></p>
+    <div class="ti-output"></div>
+    <button class="ti-skip" type="button">skip ›</button>
+  </div>
+  <script>
+    (() => {
+      const TI_PROJECTS = ["dio_pose/", "jotaro_pose/", "approaching_me_idle/"];
+      const TI_COMMAND = "ls penguins_projects";
+      const el = document.getElementById("terminal-intro");
+      const root = document.documentElement;
+      let seen = false;
+      try {
+        seen = sessionStorage.getItem("ti-seen") === "1";
+        sessionStorage.setItem("ti-seen", "1");
+      } catch {}
+      if (seen || matchMedia("(prefers-reduced-motion: reduce)").matches) {
+        el.remove();
+        return;
+      }
+      root.classList.add("ti-lock");
+      const typed = el.querySelector(".ti-typed");
+      const cursor = el.querySelector(".ti-cursor");
+      const output = el.querySelector(".ti-output");
+      const timers = [];
+      let done = false;
+      const wait = (ms) => new Promise((r) => timers.push(setTimeout(r, ms)));
+      const finish = () => {
+        if (done) return;
+        done = true;
+        timers.forEach(clearTimeout);
+        removeEventListener("keydown", onKey);
+        el.classList.remove("ti-glitch");
+        el.classList.add("ti-out");
+        setTimeout(() => {
+          el.remove();
+          root.classList.remove("ti-lock");
+        }, 650);
+      };
+      const onKey = (e) => { if (e.key === "Escape") finish(); };
+      addEventListener("keydown", onKey);
+      el.addEventListener("click", finish);
+      (async () => {
+        await wait(150);
+        for (const ch of TI_COMMAND) {
+          if (done) return;
+          typed.textContent += ch;
+          await wait(60 + Math.random() * 80);
+        }
+        await wait(180);
+        const prompt = typed.parentElement;
+        cursor.remove();
+        const row = document.createElement("p");
+        row.className = "ti-out-line";
+        output.append(row);
+        for (const name of TI_PROJECTS) {
+          if (done) return;
+          const span = document.createElement("span");
+          span.className = "ti-dir";
+          span.textContent = name;
+          row.append(span);
+          await wait(90);
+        }
+        const next = prompt.cloneNode(true);
+        next.querySelector(".ti-typed").textContent = "";
+        next.append(cursor);
+        output.append(next);
+        await wait(300);
+        if (done) return;
+        el.classList.add("ti-glitch");
+        await wait(240);
+        finish();
+      })();
+    })();
+  </script>
   <a class="skip" href="#work">Skip to work</a>
 
   <header class="top">
