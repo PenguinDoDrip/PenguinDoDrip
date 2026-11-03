@@ -456,6 +456,104 @@ function wireScrollEffects() {
   });
 }
 
+function wireTilt() {
+  if (!matchMedia("(hover: hover) and (pointer: fine)").matches) return;
+  if (matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+  document.querySelectorAll(".band").forEach((band) => {
+    const thumb = band.querySelector(".thumb");
+    if (!thumb) return;
+    let frame = 0;
+    let ev = null;
+    const apply = () => {
+      frame = 0;
+      const r = thumb.getBoundingClientRect();
+      const b = band.getBoundingClientRect();
+      const dx = Math.max(-1, Math.min(1, (ev.clientX - (r.left + r.width / 2)) / (b.width / 2)));
+      const dy = Math.max(-1, Math.min(1, (ev.clientY - (r.top + r.height / 2)) / (b.height / 2)));
+      thumb.style.setProperty("--ry", `${(dx * 14).toFixed(2)}deg`);
+      thumb.style.setProperty("--rx", `${(-dy * 10).toFixed(2)}deg`);
+      thumb.style.setProperty("--gx", `${(50 + dx * 50).toFixed(1)}%`);
+      thumb.style.setProperty("--gy", `${(50 + dy * 50).toFixed(1)}%`);
+    };
+    band.addEventListener("pointermove", (e) => {
+      ev = e;
+      thumb.classList.add("tilting");
+      if (!frame) frame = requestAnimationFrame(apply);
+    });
+    band.addEventListener("pointerleave", () => {
+      cancelAnimationFrame(frame);
+      frame = 0;
+      thumb.classList.remove("tilting");
+      ["--rx", "--ry", "--gx", "--gy"].forEach((k) => thumb.style.removeProperty(k));
+    });
+  });
+}
+
+function buildScrubber() {
+  const keys = [
+    ["home", "Start"], ["work", "Work"], ["mod", "The mod"],
+    ["about", "About"], ["faq", "FAQ"], ["contact", "Say hi"],
+  ].map(([id, name]) => ({ el: document.getElementById(id), name })).filter((k) => k.el);
+  const ticks = [...document.querySelectorAll(".band")].map((el) => ({ el }));
+  const TOTAL = 240;
+
+  const bar = document.createElement("div");
+  bar.className = "scrub";
+  bar.innerHTML = `
+    <div class="scrub-track">
+      <div class="scrub-fill"></div>
+      ${ticks.map(() => `<span class="scrub-tick"></span>`).join("")}
+      ${keys.map((k) => `<button class="scrub-key" type="button" tabindex="-1" aria-hidden="true" data-name="${esc(k.name)}"></button>`).join("")}
+      <span class="scrub-head"></span>
+    </div>
+    <span class="scrub-frame" aria-hidden="true">F <b>000</b> / ${TOTAL}</span>`;
+  document.body.append(bar);
+
+  const fill = bar.querySelector(".scrub-fill");
+  const head = bar.querySelector(".scrub-head");
+  const frameNum = bar.querySelector(".scrub-frame b");
+  const keyEls = [...bar.querySelectorAll(".scrub-key")];
+  const tickEls = [...bar.querySelectorAll(".scrub-tick")];
+  let spots = [];
+
+  keyEls.forEach((btn, i) => {
+    btn.addEventListener("click", () => keys[i].el.scrollIntoView({ behavior: "smooth" }));
+  });
+
+  const maxScroll = () => Math.max(1, document.documentElement.scrollHeight - innerHeight);
+  const spotOf = (el) => Math.min(1, Math.max(0, (el.getBoundingClientRect().top + scrollY) / maxScroll()));
+
+  const layout = () => {
+    spots = keys.map((k) => spotOf(k.el));
+    keyEls.forEach((btn, i) => { btn.style.left = `${spots[i] * 100}%`; });
+    tickEls.forEach((t, i) => { t.style.left = `${spotOf(ticks[i].el) * 100}%`; });
+    update();
+  };
+
+  const update = () => {
+    const p = Math.min(1, Math.max(0, scrollY / maxScroll()));
+    fill.style.transform = `scaleX(${p})`;
+    head.style.left = `${p * 100}%`;
+    frameNum.textContent = String(Math.round(p * TOTAL)).padStart(3, "0");
+    keyEls.forEach((btn, i) => btn.classList.toggle("hit", p >= spots[i] - 0.002));
+    const under = document.elementsFromPoint(innerWidth / 2, innerHeight - 14)
+      .map((el) => el.closest("[data-tone]"))
+      .find((el) => el && !bar.contains(el));
+    if (under) bar.classList.toggle("on-light", under.dataset.tone === "light");
+  };
+
+  let queued = false;
+  addEventListener("scroll", () => {
+    if (!queued) { queued = true; requestAnimationFrame(() => { queued = false; update(); }); }
+  }, { passive: true });
+  let t;
+  const relayout = () => { clearTimeout(t); t = setTimeout(layout, 120); };
+  addEventListener("resize", relayout);
+  addEventListener("load", layout);
+  if ("ResizeObserver" in window) new ResizeObserver(relayout).observe(document.body);
+  layout();
+}
+
 function playIntro(done) {
   let seen = false;
   try {
@@ -501,6 +599,8 @@ function init() {
   wireLightbox();
   wireCopyLinks();
   wireScrollEffects();
+  wireTilt();
+  buildScrubber();
   observeReveals();
   fitBandTitles();
   updateHeaderTone();
