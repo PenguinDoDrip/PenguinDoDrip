@@ -20,9 +20,12 @@
   <link rel="apple-touch-icon" href="assets/pfp-apple.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,100..900&family=IBM+Plex+Mono:wght@400;500&display=swap">
-  <link rel="stylesheet" href="style.css?v=2026-11-03c">
-  <script src="script.js?v=2026-11-03c" defer></script>
+  <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@100..125,400..900&family=IBM+Plex+Mono:wght@400;500&display=swap" onload="this.onload=null;this.rel='stylesheet'">
+  <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@100..125,400..900&family=IBM+Plex+Mono:wght@400;500&display=swap"></noscript>
+  <link rel="preload" as="image" href="assets/image-1.webp" fetchpriority="high">
+  <link rel="preload" as="image" href="assets/project3-thumb-6.webp" fetchpriority="high">
+  <link rel="stylesheet" href="style.css?v=2026-11-03d">
+  <script src="script.js?v=2026-11-03d" defer></script>
 </head>
 <body>
   <style>
@@ -85,6 +88,7 @@
       const el = document.getElementById("terminal-intro");
       const root = document.documentElement;
       if (matchMedia("(prefers-reduced-motion: reduce)").matches) {
+        root.classList.add("hero-in");
         el.remove();
         return;
       }
@@ -102,6 +106,7 @@
         removeEventListener("keydown", onKey);
         el.classList.remove("ti-glitch");
         el.classList.add("ti-out");
+        root.classList.add("hero-in");
         setTimeout(() => {
           el.remove();
           root.classList.remove("ti-lock");
@@ -147,7 +152,7 @@
 
   <header class="top">
     <a class="brand" href="#top" aria-label="Back to top">
-      <img class="brand-mark" src="assets/menacing.png" alt="" width="26" height="26">
+      <img class="brand-mark" src="assets/menacing-sm.png" alt="" width="26" height="26">
       <span id="site-name">PenguinDoDrip</span>
     </a>
     <nav aria-label="Main">

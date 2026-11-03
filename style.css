@@ -563,24 +563,6 @@ footer { border-top: 1px solid var(--line); }
 .lb-close:hover, .lb-nav:hover { background: var(--ink); color: var(--bg); }
 .lb-controls { position: absolute; right: 24px; bottom: 24px; display: flex; gap: 8px; }
 
-.intro {
-  position: fixed;
-  inset: 0;
-  z-index: 3000;
-  display: grid;
-  place-content: center;
-  justify-items: center;
-  gap: 22px;
-  background: var(--ink);
-  color: var(--bg);
-  clip-path: inset(0 0 0 0);
-  transition: clip-path 0.9s cubic-bezier(0.76, 0, 0.24, 1);
-}
-.intro.out { clip-path: inset(0 0 100% 0); }
-.intro img { width: 64px; height: 64px; }
-.intro-count { font-family: var(--mono); font-size: 0.8rem; letter-spacing: 0.14em; text-transform: uppercase; color: color-mix(in srgb, var(--bg) 60%, var(--ink)); }
-.intro-count b { color: var(--bg); font-weight: 500; }
-
 .js .reveal {
   opacity: 0;
   translate: 0 28px;
@@ -723,7 +705,7 @@ footer { border-top: 1px solid var(--line); }
 @media print {
   .js .reveal, .js .hero .item { opacity: 1 !important; translate: none !important; }
   .js .band .band-title { clip-path: none !important; translate: none !important; }
-  header.top, .intro, .scrub { display: none !important; }
+  header.top, .scrub { display: none !important; }
 }
 
 @media (prefers-reduced-motion: reduce) {

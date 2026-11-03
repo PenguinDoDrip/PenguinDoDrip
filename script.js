@@ -70,7 +70,7 @@ const CONTENT = {
     },
     {
       "kind": "image",
-      "src": "assets/image-1.gif",
+      "src": "assets/image-1.webp",
       "alt": "Jotaro pose animation",
       "x": 71,
       "y": 0,
@@ -94,7 +94,7 @@ const CONTENT = {
     },
     {
       "kind": "sticker",
-      "src": "assets/sticker-2.gif",
+      "src": "assets/project3-thumb-6.webp",
       "alt": "",
       "x": 62,
       "y": 52,
@@ -117,7 +117,7 @@ const CONTENT = {
       "id": "p2",
       "title": "Dio Pose",
       "desc": "A JoJo pose I made for the mod JoJo Heaven's Arrow.",
-      "thumb": "assets/project1-thumb-3.gif",
+      "thumb": "assets/project1-thumb-3.webp",
       "link": "",
       "tags": [
         "jojo",
@@ -137,7 +137,7 @@ const CONTENT = {
       "id": "p1",
       "title": "Jotaro Pose",
       "desc": "Another one I made for JoJo Heaven's Arrow. Jotaro this time.",
-      "thumb": "assets/project2-thumb-5.gif",
+      "thumb": "assets/image-1.webp",
       "link": "",
       "tags": [
         "jojo",
@@ -157,7 +157,7 @@ const CONTENT = {
       "id": "p3",
       "title": "Approaching Me Idle",
       "desc": "The pose from the \"Approaching Me\" manga panel, turned into an idle.",
-      "thumb": "assets/project3-thumb-6.gif",
+      "thumb": "assets/project3-thumb-6.webp",
       "link": "",
       "tags": [
         "jojo",
@@ -203,8 +203,8 @@ function frameAspect(m) {
   return nat ? `${nat.w} / ${nat.h}` : "4 / 3";
 }
 
-function mediaHTML(src, alt, m) {
-  return `<img src="${esc(src)}" alt="${esc(alt)}" draggable="false" style="position:absolute;left:${m.panX}%;top:${m.panY}%;width:${m.zoom * 100}%;height:auto;max-width:none;pointer-events:none;">`;
+function mediaHTML(src, alt, m, eager) {
+  return `<img src="${esc(src)}" alt="${esc(alt)}" ${eager ? 'fetchpriority="high"' : 'loading="lazy"'} decoding="async" draggable="false" style="position:absolute;left:${m.panX}%;top:${m.panY}%;width:${m.zoom * 100}%;height:auto;max-width:none;pointer-events:none;">`;
 }
 
 const scaledPx = (px) => {
@@ -247,7 +247,7 @@ function itemEl(item, i) {
   } else {
     const m = mediaOf(item);
     el.style.aspectRatio = frameAspect(m);
-    el.innerHTML = `<div class="media-frame" style="background:${m.bg}">${mediaHTML(item.src, item.alt || "", m)}</div>`;
+    el.innerHTML = `<div class="media-frame" style="background:${m.bg}">${mediaHTML(item.src, item.alt || "", m, true)}</div>`;
   }
   return el;
 }
@@ -554,36 +554,6 @@ function buildScrubber() {
   layout();
 }
 
-function playIntro(done) {
-  let seen = false;
-  try {
-    seen = sessionStorage.getItem("pdd-intro") === "1";
-    sessionStorage.setItem("pdd-intro", "1");
-  } catch {}
-  if (seen || matchMedia("(prefers-reduced-motion: reduce)").matches) {
-    done();
-    return;
-  }
-  const el = document.createElement("div");
-  el.className = "intro";
-  el.setAttribute("aria-hidden", "true");
-  el.innerHTML = `<img src="assets/menacing.png" alt=""><p class="intro-count">Frame <b>01</b> / 24</p>`;
-  document.body.append(el);
-  const b = el.querySelector("b");
-  let f = 1;
-  const tick = setInterval(() => {
-    f += 1;
-    b.textContent = pad(f);
-    if (f < 24) return;
-    clearInterval(tick);
-    setTimeout(() => {
-      el.classList.add("out");
-      done();
-      setTimeout(() => el.remove(), 1000);
-    }, 180);
-  }, 1000 / 24);
-}
-
 function init() {
   document.documentElement.classList.add("js");
   $("#site-name").textContent = CONTENT.name;
@@ -607,7 +577,7 @@ function init() {
   document.fonts?.ready.then(fitBandTitles);
   let fitTimer;
   addEventListener("resize", () => { clearTimeout(fitTimer); fitTimer = setTimeout(fitBandTitles, 120); });
-  playIntro(() => document.documentElement.classList.add("hero-in"));
+  if (!document.getElementById("terminal-intro")) document.documentElement.classList.add("hero-in");
 }
 
 init();
