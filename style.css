@@ -4,7 +4,7 @@
   --accent: #7a2cf5;
   --pop: #ffd23f;
   --paper: #fbf8f2;
-  /* light bands use these; .tone-dark flips them */
+
   --fg: var(--ink);
   --surface: var(--bg);
   --muted: color-mix(in srgb, var(--fg) 58%, var(--surface));
@@ -62,9 +62,6 @@ img { max-width: 100%; }
 }
 .skip:focus { top: 16px; }
 
-/* ---------- Public site ---------- */
-
-/* Shared type */
 .label, .split-note, .work-meta, .scroll-hint, header nav a, .facts dt, .side-title, .role-num, .band-label, .band-desc, .band-cta, .footer-inner {
   font-family: var(--mono);
   font-size: 0.75rem;
@@ -88,7 +85,6 @@ img { max-width: 100%; }
 .mega-xl { font-size: clamp(4rem, 17vw, 16rem); }
 .muted { color: var(--muted); }
 
-/* Header: colours follow the band underneath it */
 header.top {
   position: fixed;
   top: 0;
@@ -125,7 +121,6 @@ header nav a::after {
 }
 header nav a:hover::after, header nav a.active::after { transform: scaleX(1); transform-origin: left; }
 
-/* Hero */
 .hero {
   position: relative;
   min-height: 100svh;
@@ -136,7 +131,6 @@ header nav a:hover::after, header nav a.active::after { transform: scaleX(1); tr
   isolation: isolate;
 }
 
-/* Animation-curve line with keyframes, drawn on load */
 .motion-path {
   position: absolute;
   inset: 0;
@@ -157,9 +151,7 @@ header nav a:hover::after, header nav a.active::after { transform: scaleX(1); tr
 .hero-in .key-2 { animation-delay: 1.15s; }
 .hero-in .key-3 { animation-delay: 1.7s; }
 .hero-in .key-end, .hero-in .key-end-dot { animation-delay: 2.3s; }
-body.editing .motion-path { display: none; }
 
-/* Hero canvas: items are positioned in % of this box */
 .canvas {
   position: relative;
   z-index: 1;
@@ -191,13 +183,13 @@ body.editing .motion-path { display: none; }
 }
 .item.button .btn:hover { color: var(--hi); gap: 1em; }
 
-.js:not(.hero-in) body:not(.editing) .hero .item { opacity: 0; }
-/* On short screens the hero canvas narrows so the whole thing fits in one screen */
+.js:not(.hero-in) .hero .item { opacity: 0; }
+
 @media (min-width: 701px) {
-  body:not(.editing) .hero .canvas { width: min(100%, calc((100svh - 170px) * 16 / 9)); }
+  .hero .canvas { width: min(100%, calc((100svh - 170px) * 16 / 9)); }
 }
 
-.hero-in body:not(.editing) .hero .item {
+.hero-in .hero .item {
   animation: rise 1.1s var(--ease) backwards;
   animation-delay: calc(var(--i, 0) * 90ms + 60ms);
 }
@@ -215,12 +207,10 @@ body.editing .motion-path { display: none; }
 .scroll-hint span { color: var(--hi); animation: nudge 1.8s ease-in-out infinite; }
 .scroll-hint:hover { color: var(--fg); }
 
-/* Work header */
 .work-head { padding: clamp(100px, 16vh, 180px) 0 clamp(60px, 10vh, 120px); }
 .work-head .mega { margin-bottom: 40px; }
 .work-meta { display: flex; justify-content: space-between; gap: 16px; margin: 0; padding-top: 18px; border-top: 1px solid var(--line); color: var(--muted); }
 
-/* Project bands */
 .band {
   position: relative;
   display: grid;
@@ -244,7 +234,7 @@ body.editing .motion-path { display: none; }
   min-width: 0;
   padding: 32px 0 24px;
 }
-/* JS sizes the title so it fills the width on one line, and sets --fs to match */
+
 .band-title {
   position: relative;
   z-index: 1;
@@ -321,9 +311,7 @@ body.editing .motion-path { display: none; }
   transition: color 0.25s, gap 0.35s var(--ease);
 }
 .band:hover .band-cta:not(a), .band a.band-cta:hover { color: var(--hi); gap: 16px; }
-body.editing .band.sel { outline: 3px solid var(--accent); }
 
-/* The mod */
 .mod, .about-band, .faq-band, .contact { padding: clamp(100px, 16vh, 180px) 0; }
 .split { display: flex; justify-content: space-between; gap: 16px; }
 .split-note { margin: 0; display: inline-flex; align-items: center; gap: 10px; }
@@ -358,7 +346,6 @@ body.editing .band.sel { outline: 3px solid var(--accent); }
 }
 .roles p { margin: 0; color: var(--muted); font-size: 0.95rem; line-height: 1.55; }
 
-/* About */
 .about-cols {
   display: grid;
   grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr);
@@ -387,7 +374,6 @@ body.editing .band.sel { outline: 3px solid var(--accent); }
 .tools li span:first-child { font-weight: 700; font-stretch: 112%; text-transform: uppercase; letter-spacing: -0.01em; }
 .tools li span:last-child { color: var(--muted); font-size: 0.92rem; text-align: right; }
 
-/* Profile picture */
 .portrait { margin: 0 0 48px; width: min(100%, 300px); rotate: -2deg; transition: rotate 0.6s var(--ease); }
 .portrait:hover { rotate: 0deg; }
 .portrait img {
@@ -408,7 +394,6 @@ body.editing .band.sel { outline: 3px solid var(--accent); }
   color: var(--muted);
 }
 
-/* FAQ */
 .faq { border-top: 1px solid var(--fg); max-width: 1100px; margin-left: auto; }
 .faq details { border-bottom: 1px solid var(--line); }
 .faq summary {
@@ -440,7 +425,6 @@ body.editing .band.sel { outline: 3px solid var(--accent); }
 .faq details p { margin: 0; padding: 0 64px 28px 0; max-width: 70ch; color: var(--muted); font-size: 1.05rem; line-height: 1.65; }
 .faq details[open] p { animation: fade 0.4s ease; }
 
-/* Contact */
 .contact .mega { margin-bottom: 32px; }
 .contact-lead { max-width: 52ch; margin: 0 0 64px; font-size: clamp(1.1rem, 1.6vw, 1.35rem); color: var(--muted); }
 .links { display: grid; border-top: 1px solid var(--fg); }
@@ -484,7 +468,6 @@ body.editing .band.sel { outline: 3px solid var(--accent); }
 .links > a:hover, .links > button:hover { color: var(--hi); padding-left: 16px; }
 .links > a:hover::after { rotate: 45deg; }
 
-/* Footer */
 footer { border-top: 1px solid var(--line); }
 .footer-inner {
   display: flex;
@@ -498,7 +481,6 @@ footer { border-top: 1px solid var(--line); }
 .footer-inner a { text-decoration: none; color: var(--fg); }
 .footer-inner a:hover { color: var(--hi); }
 
-/* "To Be Continued" arrow: slides in from the right when you reach the end */
 .tbc-row { padding-top: 56px; overflow: hidden; }
 .tbc {
   display: inline-flex;
@@ -515,12 +497,11 @@ footer { border-top: 1px solid var(--line); }
   background: var(--pop);
   clip-path: polygon(0 50%, 40px 0, 100% 0, 100% 100%, 40px 100%);
 }
-/* The row is what gets watched (the arrow itself starts off-screen, so it can't be) */
+
 .js .tbc-row.reveal { opacity: 1; translate: none; }
 .js .tbc { translate: 110vw 0; transition: translate 1.1s cubic-bezier(0.2, 0.9, 0.2, 1) 0.2s; }
 .js .tbc-row.in .tbc { translate: 0 0; }
 
-/* Lightbox */
 .lightbox {
   width: min(1040px, calc(100% - 32px));
   max-height: calc(100dvh - 32px);
@@ -556,7 +537,7 @@ footer { border-top: 1px solid var(--line); }
   letter-spacing: -0.04em;
   text-transform: uppercase;
 }
-/* Stand-name brackets around the project title */
+
 .lb-text h3::before, .lb-text h3::after { font-weight: 400; font-stretch: 100%; color: var(--accent); }
 .lb-text h3::before { content: "「"; margin-left: -0.15em; }
 .lb-text h3::after { content: "」"; }
@@ -582,7 +563,6 @@ footer { border-top: 1px solid var(--line); }
 .lb-close:hover, .lb-nav:hover { background: var(--ink); color: var(--bg); }
 .lb-controls { position: absolute; right: 24px; bottom: 24px; display: flex; gap: 8px; }
 
-/* Intro: a frame counter ticks 01 → 24, then the curtain lifts */
 .intro {
   position: fixed;
   inset: 0;
@@ -601,7 +581,6 @@ footer { border-top: 1px solid var(--line); }
 .intro-count { font-family: var(--mono); font-size: 0.8rem; letter-spacing: 0.14em; text-transform: uppercase; color: color-mix(in srgb, var(--bg) 60%, var(--ink)); }
 .intro-count b { color: var(--bg); font-weight: 500; }
 
-/* Scroll reveal (only when JS has marked the page ready) */
 .js .reveal {
   opacity: 0;
   translate: 0 28px;
@@ -610,7 +589,6 @@ footer { border-top: 1px solid var(--line); }
 .js .reveal.in { opacity: 1; translate: 0 0; }
 .js .band .band-title { clip-path: inset(0 0 100% 0); translate: 0 40px; transition: clip-path 1.1s var(--ease), translate 1.1s var(--ease); }
 .js .band.in .band-title { clip-path: inset(-10% -5% -10% -5%); translate: 0 0; }
-body.editing .band .band-title { clip-path: none; translate: none; }
 
 @keyframes rise { from { opacity: 0; translate: 0 24px; } }
 @keyframes fade { from { opacity: 0; } }
@@ -648,13 +626,12 @@ body.editing .band .band-title { clip-path: none; translate: none; }
   .lb-text { padding: 32px 24px 96px; }
 }
 
-/* Phones: the hero canvas becomes a simple stacked layout (owner mode keeps the free canvas) */
 @media (max-width: 700px) {
   header.top { padding: 16px var(--gutter); }
   header nav a:not([href="#contact"]) { display: none; }
   .hero { min-height: auto; padding-top: 100px; padding-bottom: 80px; }
   .motion-path { display: none; }
-  body:not(.editing) .canvas {
+  .canvas {
     display: flex;
     flex-direction: column;
     align-items: flex-start;
@@ -663,7 +640,7 @@ body.editing .band .band-title { clip-path: none; translate: none; }
     aspect-ratio: auto !important;
     overflow: visible;
   }
-  body:not(.editing) .canvas .item {
+  .canvas .item {
     position: relative;
     left: auto !important;
     top: auto !important;
@@ -671,10 +648,9 @@ body.editing .band .band-title { clip-path: none; translate: none; }
     max-width: 100%;
     transform: none !important;
   }
-  body:not(.editing) .canvas .item.image,
-  body:not(.editing) .canvas .item.video { width: 100% !important; max-width: 420px; margin-top: 18px; }
-  body:not(.editing) .canvas .item.sticker { display: none; }
-  body.editing .canvas { aspect-ratio: auto !important; height: 140vw; }
+  .canvas .item.image,
+  .canvas .item.video { width: 100% !important; max-width: 420px; margin-top: 18px; }
+  .canvas .item.sticker { display: none; }
   .scroll-hint { left: var(--gutter); right: auto; bottom: 28px; }
   .band { min-height: auto; padding-block: 32px 40px; }
   .band-top { flex-direction: column; gap: 10px; }
@@ -693,160 +669,3 @@ body.editing .band .band-title { clip-path: none; translate: none; }
   .tbc { height: 52px; padding: 0 28px 0 48px; clip-path: polygon(0 50%, 30px 0, 100% 0, 100% 100%, 30px 100%); }
   .faq details p { padding-right: 0; }
 }
-
-/* ---------- Owner editor (only exists after passphrase) ---------- */
-
-body.editing { padding-top: 52px; }
-body.editing .canvas { outline: 2px dashed rgba(0, 0, 0, 0.25); }
-body.editing .item { cursor: move; touch-action: none; outline: 1px dashed rgba(0, 0, 0, 0.25); }
-body.editing .item.locked { cursor: not-allowed; outline-style: dotted; }
-body.editing .item.selected { outline: 2px solid var(--accent); }
-body.editing .item.text[contenteditable="true"] { cursor: text; outline: 2px solid var(--ink); }
-
-.handle {
-  position: absolute;
-  width: 16px;
-  height: 16px;
-  background: #fff;
-  border: 2px solid var(--accent);
-  border-radius: 50%;
-}
-.handle.resize { right: -10px; bottom: -10px; cursor: nwse-resize; }
-.handle.rotate { left: 50%; top: -34px; transform: translateX(-50%); cursor: grab; }
-.handle.rotate::after {
-  content: "";
-  position: absolute;
-  left: 50%;
-  top: 16px;
-  width: 2px;
-  height: 18px;
-  background: var(--accent);
-}
-
-#ed-bar {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  z-index: 1000;
-  display: flex;
-  flex-wrap: wrap;
-  gap: 6px;
-  align-items: center;
-  padding: 8px 12px;
-  background: var(--ink);
-  color: #fff;
-  font-size: 0.85rem;
-}
-
-#ed-panel {
-  position: fixed;
-  top: 52px;
-  right: 0;
-  bottom: 0;
-  width: 320px;
-  max-width: 100vw;
-  overflow: auto;
-  padding: 12px;
-  background: #fff;
-  border-left: 3px solid var(--ink);
-  font-size: 0.9rem;
-  z-index: 999;
-}
-
-body.editing main { margin-right: 320px; }
-
-@media (max-width: 760px) {
-  body.editing { padding-bottom: 50vh; }
-  body.editing main { margin-right: 0; }
-  #ed-panel { top: auto; height: 50vh; width: 100%; border-left: 0; border-top: 3px solid var(--ink); }
-}
-
-#ed-bar button, #ed-panel button {
-  font: inherit;
-  padding: 5px 9px;
-  border: 2px solid var(--ink);
-  background: #fff;
-  color: var(--ink);
-  cursor: pointer;
-}
-#ed-bar button { background: var(--accent); color: #fff; border-color: #fff; }
-#ed-bar button:disabled { opacity: 0.4; cursor: default; }
-#ed-panel button:hover, #ed-bar button:hover:not(:disabled) { filter: brightness(1.08); }
-
-#ed-panel label { display: block; margin: 8px 0; font-weight: 600; }
-#ed-panel input, #ed-panel textarea, #ed-panel select {
-  display: block;
-  width: 100%;
-  margin-top: 3px;
-  padding: 5px;
-  font: inherit;
-  border: 1.5px solid #333;
-}
-#ed-panel input[type="checkbox"], #ed-panel input[type="color"] { width: auto; display: inline-block; }
-#ed-panel .row { display: flex; flex-wrap: wrap; gap: 6px; align-items: center; margin: 8px 0; }
-#ed-panel .row input { width: auto; flex: 1; }
-#ed-panel .tabs { display: flex; gap: 4px; margin-bottom: 10px; }
-#ed-panel .tabs button.on { background: var(--ink); color: #fff; }
-#ed-panel .hint { opacity: 0.7; line-height: 1.4; }
-#ed-panel .card-form { border: 1.5px solid #ccc; padding: 8px; margin-bottom: 10px; }
-#ed-panel .mini { width: 52px; height: 40px; object-fit: cover; border: 1px solid #000; }
-
-/* Media frames (images, GIFs, videos on the canvas) */
-.media-frame { position: relative; width: 100%; height: 100%; overflow: hidden; border-radius: inherit; }
-.media-frame > * { will-change: transform; }
-
-/* Crop preview in the panel: checkerboard shows empty space */
-#ed-panel .crop-box {
-  position: relative;
-  width: 100%;
-  overflow: visible;
-  border: 2px solid var(--ink);
-  background: repeating-conic-gradient(#ddd 0 25%, #fff 0 50%) 0 0 / 16px 16px;
-  cursor: grab;
-  touch-action: none;
-}
-#ed-panel .crop-box:active { cursor: grabbing; }
-/* The crop-inner clips the picture to the frame. The outline (show outside) is not clipped. */
-#ed-panel .crop-inner { position: absolute; inset: 0; overflow: hidden; pointer-events: none; }
-#ed-panel .src-outline {
-  position: absolute;
-  border: 1.5px dashed var(--accent);
-  pointer-events: none;
-}
-
-/* Browser tab mock-up */
-#ed-panel .fake-tab {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  padding: 6px 12px;
-  border: 1.5px solid #333;
-  border-radius: 8px 8px 0 0;
-  background: #f1f1f1;
-  max-width: 100%;
-}
-#ed-panel .fake-tab img { width: 16px; height: 16px; object-fit: contain; }
-#ed-panel .fake-tab span { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; font-size: 0.85rem; }
-
-/* Share card mock-up */
-#ed-panel .share-preview {
-  border: 1.5px solid #ccc;
-  padding: 8px;
-  display: grid;
-  gap: 4px;
-  margin: 6px 0;
-}
-#ed-panel .share-preview img { width: 100%; aspect-ratio: 1200 / 630; object-fit: cover; border: 1px solid #000; }
-#ed-panel .share-preview span { font-size: 0.8rem; opacity: 0.75; }
-
-/* Project cards in the editor panel */
-#ed-panel details.card-form summary { cursor: pointer; margin-bottom: 6px; }
-#ed-panel details.card-form h4 { margin: 12px 0 4px; font-size: 0.85rem; text-transform: uppercase; opacity: 0.7; }
-
-
-/* Owner mode on the dark hero and bands */
-body.editing header.top { top: 52px; }
-@media (min-width: 761px) { body.editing header.top { right: 320px; } }
-body.editing .hero .canvas { outline-color: rgba(255, 255, 255, 0.3); }
-body.editing .hero .item { outline-color: rgba(255, 255, 255, 0.3); }
