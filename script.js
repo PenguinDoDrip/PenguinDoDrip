@@ -51,7 +51,7 @@ const CONTENT = {
   "identity": {
     "title": "PenguinDoDrip's Portfolio",
     "description": "PenguinDoDrip's portfolio. Animator for JoJo Heaven's Arrow and programmer.",
-    "favicon": "assets/favicon-7.jpg",
+    "favicon": "assets/pfp-icon.png",
     "shareImage": "assets/share-image-8.jpg",
     "shareTitle": "PenguinDoDrip's Portfolio",
     "shareDescription": ""

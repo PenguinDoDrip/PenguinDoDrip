@@ -387,6 +387,27 @@ body.editing .band.sel { outline: 3px solid var(--accent); }
 .tools li span:first-child { font-weight: 700; font-stretch: 112%; text-transform: uppercase; letter-spacing: -0.01em; }
 .tools li span:last-child { color: var(--muted); font-size: 0.92rem; text-align: right; }
 
+/* Profile picture */
+.portrait { margin: 0 0 48px; width: min(100%, 300px); rotate: -2deg; transition: rotate 0.6s var(--ease); }
+.portrait:hover { rotate: 0deg; }
+.portrait img {
+  display: block;
+  width: 100%;
+  height: auto;
+  border: 1px solid color-mix(in srgb, var(--bg) 25%, transparent);
+  box-shadow: 0 30px 60px -30px rgba(0, 0, 0, 0.7);
+}
+.portrait figcaption {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 10px;
+  font-family: var(--mono);
+  font-size: 0.68rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
 /* FAQ */
 .faq { border-top: 1px solid var(--fg); max-width: 1100px; margin-left: auto; }
 .faq details { border-bottom: 1px solid var(--line); }
@@ -477,6 +498,28 @@ footer { border-top: 1px solid var(--line); }
 .footer-inner a { text-decoration: none; color: var(--fg); }
 .footer-inner a:hover { color: var(--hi); }
 
+/* "To Be Continued" arrow: slides in from the right when you reach the end */
+.tbc-row { padding-top: 56px; overflow: hidden; }
+.tbc {
+  display: inline-flex;
+  align-items: center;
+  height: 64px;
+  padding: 0 40px 0 64px;
+  font-weight: 800;
+  font-style: italic;
+  font-stretch: 112%;
+  font-size: clamp(1rem, 2.4vw, 1.6rem);
+  letter-spacing: -0.01em;
+  text-transform: uppercase;
+  color: var(--ink);
+  background: var(--pop);
+  clip-path: polygon(0 50%, 40px 0, 100% 0, 100% 100%, 40px 100%);
+}
+/* The row is what gets watched (the arrow itself starts off-screen, so it can't be) */
+.js .tbc-row.reveal { opacity: 1; translate: none; }
+.js .tbc { translate: 110vw 0; transition: translate 1.1s cubic-bezier(0.2, 0.9, 0.2, 1) 0.2s; }
+.js .tbc-row.in .tbc { translate: 0 0; }
+
 /* Lightbox */
 .lightbox {
   width: min(1040px, calc(100% - 32px));
@@ -513,6 +556,10 @@ footer { border-top: 1px solid var(--line); }
   letter-spacing: -0.04em;
   text-transform: uppercase;
 }
+/* Stand-name brackets around the project title */
+.lb-text h3::before, .lb-text h3::after { font-weight: 400; font-stretch: 100%; color: var(--accent); }
+.lb-text h3::before { content: "「"; margin-left: -0.15em; }
+.lb-text h3::after { content: "」"; }
 .lb-text p { margin: 0 0 20px; line-height: 1.6; color: color-mix(in srgb, var(--ink) 65%, var(--bg)); }
 .lb-text .tags span { border-color: color-mix(in srgb, var(--ink) 20%, transparent); }
 .lb-text a { font-weight: 700; color: var(--accent); }
@@ -643,6 +690,7 @@ body.editing .band .band-title { clip-path: none; translate: none; }
   .link-meta { display: none; }
   .tools li { flex-direction: column; gap: 4px; }
   .tools li span:last-child { text-align: left; }
+  .tbc { height: 52px; padding: 0 28px 0 48px; clip-path: polygon(0 50%, 30px 0, 100% 0, 100% 100%, 30px 100%); }
   .faq details p { padding-right: 0; }
 }
 
