@@ -61,6 +61,8 @@
     .ti-path { color: #79c0ff; }
     .ti-dir { color: #79c0ff; font-weight: 700; }
     .ti-out-line { display: flex; flex-wrap: wrap; gap: 0 2.5em; margin: 0; }
+    .ti-file { color: #c9d1d9; }
+    .ti-bar { color: #d2a8ff; }
     .ti-cursor {
       display: inline-block;
       width: 0.6em;
@@ -84,7 +86,7 @@
   <script>
     (() => {
       const TI_PROJECTS = ["dio_pose/", "jotaro_pose/", "approaching_me_idle/"];
-      const TI_COMMAND = "ls penguins_projects";
+      const TI_FILES = ["dio.bbmodel", "dio.geo.json", "dio.animation.json"];
       const el = document.getElementById("terminal-intro");
       const root = document.documentElement;
       if (matchMedia("(prefers-reduced-motion: reduce)").matches) {
@@ -93,9 +95,10 @@
         return;
       }
       root.classList.add("ti-lock");
-      const typed = el.querySelector(".ti-typed");
       const cursor = el.querySelector(".ti-cursor");
       const output = el.querySelector(".ti-output");
+      const firstPrompt = el.querySelector(".ti-line");
+      let typed = el.querySelector(".ti-typed");
       const timers = [];
       let done = false;
       const wait = (ms) => new Promise((r) => timers.push(setTimeout(r, ms)));
@@ -115,32 +118,87 @@
       const onKey = (e) => { if (e.key === "Escape") finish(); };
       addEventListener("keydown", onKey);
       el.addEventListener("click", finish);
-      (async () => {
-        await wait(150);
-        for (const ch of TI_COMMAND) {
+
+      const type = async (text, min, max) => {
+        for (const ch of text) {
           if (done) return;
           typed.textContent += ch;
-          await wait(60 + Math.random() * 80);
+          await wait(min + Math.random() * (max - min));
         }
-        await wait(180);
-        const prompt = typed.parentElement;
-        cursor.remove();
+      };
+      const tab = async (rest) => {
+        await wait(110);
+        typed.textContent += rest;
+        await wait(120);
+      };
+      const prompt = (path) => {
+        const line = firstPrompt.cloneNode(true);
+        line.querySelector(".ti-path").textContent = path;
+        typed = line.querySelector(".ti-typed");
+        typed.textContent = "";
+        line.querySelector(".ti-cursor")?.remove();
+        line.append(cursor);
+        output.append(line);
+      };
+      const print = (names, cls) => {
         const row = document.createElement("p");
         row.className = "ti-out-line";
+        names.forEach((n) => {
+          const span = document.createElement("span");
+          span.className = cls;
+          span.textContent = n;
+          row.append(span);
+        });
         output.append(row);
+        return row;
+      };
+
+      (async () => {
+        await wait(150);
+        await type("ls penguins_projects", 60, 140);
+        await wait(180);
+        if (done) return;
+        const dirs = print([], "ti-dir");
         for (const name of TI_PROJECTS) {
           if (done) return;
           const span = document.createElement("span");
           span.className = "ti-dir";
           span.textContent = name;
-          row.append(span);
+          dirs.append(span);
           await wait(90);
         }
-        const next = prompt.cloneNode(true);
-        next.querySelector(".ti-typed").textContent = "";
-        next.append(cursor);
-        output.append(next);
-        await wait(300);
+
+        prompt("~");
+        await wait(220);
+        await type("cd pen", 35, 65);
+        await tab("guins_projects/");
+        await type("di", 35, 65);
+        await tab("o_pose/");
+        await wait(140);
+        if (done) return;
+
+        prompt("~/penguins_projects/dio_pose");
+        await wait(160);
+        await type("ls", 35, 65);
+        await wait(140);
+        if (done) return;
+        print(TI_FILES, "ti-file");
+
+        prompt("~/penguins_projects/dio_pose");
+        await wait(200);
+        await type("./play", 35, 65);
+        await wait(160);
+        if (done) return;
+        const load = document.createElement("p");
+        load.className = "ti-line";
+        output.append(load);
+        cursor.remove();
+        for (let i = 0; i <= 10; i++) {
+          if (done) return;
+          load.innerHTML = `loading animations <span class="ti-bar">[${"█".repeat(i)}${"░".repeat(10 - i)}]</span> ${i * 10}%`;
+          await wait(i < 7 ? 55 + Math.random() * 50 : 90);
+        }
+        await wait(260);
         if (done) return;
         el.classList.add("ti-glitch");
         await wait(240);
