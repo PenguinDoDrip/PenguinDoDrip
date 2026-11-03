@@ -67,20 +67,6 @@
       background: #c9d1d9;
       animation: ti-blink 1s steps(1) infinite;
     }
-    .ti-skip {
-      position: absolute;
-      right: clamp(16px, 4vw, 40px);
-      bottom: clamp(16px, 4vw, 40px);
-      padding: 6px 12px;
-      font: inherit;
-      font-size: 13px;
-      color: #8b949e;
-      background: transparent;
-      border: 1px solid #30363d;
-      border-radius: 6px;
-      cursor: pointer;
-    }
-    .ti-skip:hover, .ti-skip:focus-visible { color: #c9d1d9; border-color: #8b949e; outline: none; }
     @keyframes ti-blink { 50% { opacity: 0; } }
     @keyframes ti-glitch {
       0% { clip-path: inset(10% 0 60% 0); transform: translate(-6px, 0); filter: hue-rotate(90deg); }
@@ -91,7 +77,6 @@
   <div id="terminal-intro" aria-hidden="true">
     <p class="ti-line"><span class="ti-user">penguin@portfolio</span>:<span class="ti-path">~</span>$ <span class="ti-typed"></span><span class="ti-cursor"></span></p>
     <div class="ti-output"></div>
-    <button class="ti-skip" type="button">skip ›</button>
   </div>
   <script>
     (() => {
@@ -99,12 +84,7 @@
       const TI_COMMAND = "ls penguins_projects";
       const el = document.getElementById("terminal-intro");
       const root = document.documentElement;
-      let seen = false;
-      try {
-        seen = sessionStorage.getItem("ti-seen") === "1";
-        sessionStorage.setItem("ti-seen", "1");
-      } catch {}
-      if (seen || matchMedia("(prefers-reduced-motion: reduce)").matches) {
+      if (matchMedia("(prefers-reduced-motion: reduce)").matches) {
         el.remove();
         return;
       }
