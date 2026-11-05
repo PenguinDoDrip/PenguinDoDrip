@@ -114,6 +114,26 @@ const CONTENT = {
   ],
   "projects": [
     {
+      "id": "p5",
+      "title": "Kars Pose",
+      "desc": "A pose for Kars, also for JoJo Heaven's Arrow.",
+      "thumb": "assets/karsPose2.webp",
+      "link": "",
+      "tags": [
+        "jojo",
+        "pose"
+      ],
+      "media": {
+        "aspect": "auto",
+        "panX": 0,
+        "panY": 0,
+        "zoom": 1,
+        "bg": "transparent",
+        "natW": 371,
+        "natH": 539
+      }
+    },
+    {
       "id": "p4",
       "title": "Kars Gut Punch",
       "desc": "A gut punch for Kars, made for JoJo Heaven's Arrow.",
