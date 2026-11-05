@@ -114,6 +114,26 @@ const CONTENT = {
   ],
   "projects": [
     {
+      "id": "p4",
+      "title": "Kars Gut Punch",
+      "desc": "A gut punch for Kars, made for JoJo Heaven's Arrow.",
+      "thumb": "assets/karsUS.webp",
+      "link": "",
+      "tags": [
+        "jojo",
+        "attack"
+      ],
+      "media": {
+        "aspect": "auto",
+        "panX": 0,
+        "panY": 0,
+        "zoom": 1,
+        "bg": "transparent",
+        "natW": 438,
+        "natH": 564
+      }
+    },
+    {
       "id": "p2",
       "title": "Dio Pose",
       "desc": "A JoJo pose I made for the mod JoJo Heaven's Arrow.",
@@ -575,6 +595,8 @@ function init() {
   fitBandTitles();
   updateHeaderTone();
   document.fonts?.ready.then(fitBandTitles);
+  document.fonts?.addEventListener("loadingdone", fitBandTitles);
+  addEventListener("load", fitBandTitles);
   let fitTimer;
   addEventListener("resize", () => { clearTimeout(fitTimer); fitTimer = setTimeout(fitBandTitles, 120); });
   if (!document.getElementById("terminal-intro")) document.documentElement.classList.add("hero-in");
